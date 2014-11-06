@@ -45,6 +45,14 @@
                 </util:list>
             </property>
         </bean>
+        <bean class="net.volkno.archetype.cnea.trazabilidad.backend.service.aspect.PublicRule">
+            <property name="httpMethod" value="OPTIONS" />
+            <property name="endpoints">
+                <util:list>
+                    <value>.*</value>
+                </util:list>
+            </property>
+        </bean>
     </util:list>        
         
 </beans>

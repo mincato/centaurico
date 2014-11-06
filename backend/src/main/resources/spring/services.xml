@@ -27,7 +27,7 @@
     
     <import resource="public-methods-rules.xml" />
     
-    <bean id="authorizationFilter" class="net.volkno.archetype.cnea.trazabilidad.backend.service.aspect.AuthorizationFilter">
+    <bean id="authorizationFilter" class="net.volkno.archetype.epidata.argentarii.backend.service.aspect.AuthorizationFilter">
         <property name="publicMethodsRules" ref="publicMethodsRules" />
     </bean>
     
@@ -60,7 +60,7 @@
         </jaxrs:providers>
     </jaxrs:server>
 
-    <context:component-scan base-package="net.volkno.archetype.cnea.trazabilidad.backend"
+    <context:component-scan base-package="net.volkno.archetype.epidata.argentarii.backend"
         annotation-config="true" />
     <context:annotation-config />
     

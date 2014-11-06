@@ -39,6 +39,6 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
     
-    <jpa:repositories base-package="net.volkno.archetype.cnea.trazabilidad.backend.repository" />
+    <jpa:repositories base-package="net.volkno.archetype.epidata.argentarii.backend.repository" />
 
 </beans>

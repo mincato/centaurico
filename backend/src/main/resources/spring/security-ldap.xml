@@ -12,7 +12,7 @@
 	<bean id="contextSource" class="org.springframework.ldap.core.support.LdapContextSource">
 		<property name="url" value="ldap://localhost:10389" />
 		<property name="base" value="dc=example,dc=com" />
-		<property name="userDn" value="cn=Cosme Fulanito+sn=Fulanito+uid=cosme,ou=carem,o=cnea,dc=example,dc=com" />
+		<property name="userDn" value="cn=Cosme Fulanito+sn=Fulanito+uid=cosme,ou=carem,o=epidata,dc=example,dc=com" />
 		<property name="password" value="soycosme" />
 	</bean>
 	 
@@ -20,15 +20,15 @@
 		<constructor-arg ref="contextSource" />
 	</bean>
 	
-	<bean id="authenticatorLDAPService" class="net.volkno.archetype.cnea.trazabilidad.backend.service.security.AuthenticatorLDAPService">
+	<bean id="authenticatorLDAPService" class="net.volkno.archetype.epidata.argentarii.backend.service.security.AuthenticatorLDAPService">
 <!-- 		<property name="ldapTemplate" ref="ldapTemplate" /> -->
 		<property name="filterAttribute" value="uid" />
 <!-- 		<property name="filterAttribute" value="sAMAccountName" /> -->
 	</bean>
 	
-	<bean id="authenticatorMockService" class="net.volkno.archetype.cnea.trazabilidad.backend.service.security.AuthenticatorMockService" />
+	<bean id="authenticatorMockService" class="net.volkno.archetype.epidata.argentarii.backend.service.security.AuthenticatorMockService" />
 	
-	<bean id="userService" class="net.volkno.archetype.cnea.trazabilidad.backend.service.UserService">
+	<bean id="userService" class="net.volkno.archetype.epidata.argentarii.backend.service.UserService">
 		<property name="authenticatorService" ref="authenticatorMockService" />
 <!-- 		<property name="authenticatorService" ref="authenticatorLDAPService" /> -->
 	</bean>

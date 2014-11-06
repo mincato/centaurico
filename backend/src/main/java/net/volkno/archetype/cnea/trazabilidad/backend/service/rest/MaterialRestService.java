@@ -25,14 +25,11 @@ import net.volkno.archetype.cnea.trazabilidad.backend.util.RestResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.security.RolesAllowed;
-
 
 @Service
 @Path("/materiales")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@RolesAllowed("CRUD_MATERIALES")
 public class MaterialRestService {
     
     @Autowired
@@ -47,7 +44,6 @@ public class MaterialRestService {
     @POST
     public Response createMaterial(@Context HttpServletRequest request, Material material) {
         try {
-            material.setUsuarioCreacionId(requestHandler.getUserFromRequestInfo(request).getId()); //Lamentablemente, lo hacemos acá
             material = materialService.createMaterial(material);
             return responseHandler.buildSuccessResponse(material, Status.CREATED);
         } catch (Exception e) {
@@ -59,7 +55,6 @@ public class MaterialRestService {
     @Path("{id}")
     public Response updateMaterial(@Context HttpServletRequest request, Material material) {
         try {
-            material.setUsuarioActualizoId(requestHandler.getUserFromRequestInfo(request).getId()); //Lamentablemente, lo hacemos acá            
             material = materialService.updateMaterial(material);
             return responseHandler.buildSuccessResponse(material, Status.ACCEPTED);
         } catch (Exception e) {

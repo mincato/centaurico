@@ -20,13 +20,10 @@ import net.volkno.archetype.cnea.trazabilidad.backend.util.RestResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.security.RolesAllowed;
-
 @Service
 @Path("/tipo-materiales")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@RolesAllowed("CRUD_TIPOS_MATERIALES")
 public class TipoMaterialRestService {
 
 	@Autowired

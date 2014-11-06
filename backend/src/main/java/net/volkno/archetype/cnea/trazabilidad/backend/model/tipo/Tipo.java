@@ -13,11 +13,6 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.hibernate.envers.Audited;
 
-/**
- * 
- * @author Adrian Paredes
- *
- */
 @Entity
 @Table(name = "tipos")
 @Where(clause="state <> '0'")

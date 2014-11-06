@@ -23,11 +23,6 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.ReadOnlyJWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 
-/**
- * 
- * @author Adrian Paredes
- *
- */
 @Service
 public class TokenHandler {
     

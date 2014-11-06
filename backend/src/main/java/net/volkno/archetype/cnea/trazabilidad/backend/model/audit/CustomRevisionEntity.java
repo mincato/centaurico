@@ -10,10 +10,6 @@ import javax.persistence.Entity;
 import org.hibernate.envers.DefaultTrackingModifiedEntitiesRevisionEntity;
 import org.hibernate.envers.RevisionEntity;
 
-/**
- *
- * @author Juan Pablo Vello
- */
 @Entity
 @RevisionEntity(CustomRevisionListener.class)
 public class CustomRevisionEntity extends DefaultTrackingModifiedEntitiesRevisionEntity {

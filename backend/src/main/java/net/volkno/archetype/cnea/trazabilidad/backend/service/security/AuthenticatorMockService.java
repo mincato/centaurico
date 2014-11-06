@@ -2,11 +2,6 @@ package net.volkno.archetype.cnea.trazabilidad.backend.service.security;
 
 import org.springframework.stereotype.Service;
 
-/**
- * 
- * @author Adrian Paredes
- *
- */
 @Service
 public class AuthenticatorMockService implements AuthenticatorService {
 

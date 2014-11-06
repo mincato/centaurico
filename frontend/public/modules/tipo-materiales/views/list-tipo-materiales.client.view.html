@@ -4,13 +4,8 @@
     </div>
     <div class="list-group">
         <a data-ng-repeat="tipoMateriale in tipoMateriales" data-ng-href="#!/tipo-materiales/{{tipoMateriale._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="tipoMateriale.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="tipoMateriale.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="tipoMateriale.name"></h4>
+			<h4 class="list-group-item-heading" data-ng-bind="tipoMateriale.codigo"></h4>
+            <h4 class="list-group-item-heading" data-ng-bind="tipoMateriale.valor"></h4>
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!tipoMateriales.$resolved || tipoMateriales.length">

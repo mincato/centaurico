@@ -17,10 +17,6 @@ import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
 import org.springframework.stereotype.Component;
 
-/**
- *
- * @author Juan Pablo Vello
- */
 @Component
 public class JSONDateDeserialize extends JsonDeserializer<Date> {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

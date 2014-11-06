@@ -6,11 +6,6 @@ import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.ldap.filter.Filter;
 import org.springframework.stereotype.Service;
 
-/**
- * 
- * @author Adrian Paredes
- *
- */
 @Service
 public class AuthenticatorLDAPService implements AuthenticatorService {
 

@@ -13,10 +13,6 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 
-/**
- *
- * @author Juan Pablo Vello
- */
 public class JSONDateSerialize extends JsonSerializer<Date> {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     

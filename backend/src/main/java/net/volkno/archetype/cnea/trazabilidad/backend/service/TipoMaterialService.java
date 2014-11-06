@@ -9,11 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * 
- * @author Adrian Paredes
- *
- */
 @Service
 public class TipoMaterialService {
 
@@ -27,6 +22,19 @@ public class TipoMaterialService {
 	
 	public List<TipoMaterial> getAll() {
 		return tipoMaterialRepository.findAll();
+	}
+
+	@Transactional
+	public TipoMaterial update(TipoMaterial tipoMaterial) {
+		return tipoMaterialRepository.save(tipoMaterial); 
+	}
+
+	public TipoMaterial find(String id) {
+		return tipoMaterialRepository.findOne(id);
+	}
+
+	public void delete(TipoMaterial tipoMaterial) {
+		tipoMaterialRepository.delete(tipoMaterial);
 	}
 	
 }

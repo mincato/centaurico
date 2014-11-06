@@ -15,10 +15,6 @@ import javax.persistence.Table;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.envers.Audited;
 
-/**
- * 
- * @author Juan Pablo Vello
- */
 @Entity
 @Table(name = "roles")
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -11,10 +11,6 @@ import org.hibernate.envers.RevisionListener;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-/**
- *
- * @author Juan Pablo Vello
- */
 public class CustomRevisionListener implements RevisionListener {
 	
     private static final Logger LOGGER = Logger.getLogger(CustomRevisionListener.class);

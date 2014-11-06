@@ -10,10 +10,6 @@ import net.volkno.archetype.cnea.trazabilidad.backend.model.Material;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-/**
- *
- * @author Juan Pablo Vello
- */
 public interface MaterialRepository  extends JpaRepository<Material, String>, JpaSpecificationExecutor<Material> {
 
 }

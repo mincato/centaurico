@@ -1,9 +1,8 @@
 'use strict';
 
 // Tipo materiales controller
-angular.module('tipo-materiales').controller('TipoMaterialesController', ['$scope', '$stateParams', '$location', 'Authentication', 'TipoMateriales',
-	function($scope, $stateParams, $location, Authentication, TipoMateriales) {
-		$scope.authentication = Authentication;
+angular.module('tipo-materiales').controller('TipoMaterialesController', ['$scope', '$stateParams', '$location', 'TipoMateriales',
+	function($scope, $stateParams, $location, TipoMateriales) {
 
 		// Create new Tipo materiale
 		$scope.create = function() {

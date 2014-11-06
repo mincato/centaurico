@@ -13,21 +13,18 @@
     
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
-        <maven.compiler.target>1.7</maven.compiler.target>
-        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
         <maven.war.plugin.version>2.1</maven.war.plugin.version>
         <yeoman.maven.plugin.version>0.2</yeoman.maven.plugin.version>
 
         <junit.version>4.11</junit.version>
-        <mockito.version>1.9.5</mockito.version>
+        <mockito.version>1.10.8</mockito.version>
         <log4j.version>1.2.17</log4j.version>
-        <h2database.version>1.4.180</h2database.version>        
-        <dbunit.version>2.5.0</dbunit.version>
-        <spring-test-dbunit.version>1.1.0</spring-test-dbunit.version>
         
-        <servlet.version>3.0.1</servlet.version>
-        <cxf.version>2.7.6</cxf.version>
-        <spring.version>4.0.6.RELEASE</spring.version>
+        <servlet.version>3.1.0</servlet.version>
+        <cxf.version>2.7.13</cxf.version>
+        <spring.version>4.1.1.RELEASE</spring.version>
         <spring-data-jpa.version>1.6.2.RELEASE</spring-data-jpa.version>
         <spring-ldap-core.version>2.0.2.RELEASE</spring-ldap-core.version>
         <jackson.version>1.9.13</jackson.version>
@@ -43,7 +40,7 @@
         <slf4j.version>1.7.5</slf4j.version>
         <nimbus-jose-jwt.version>2.26.1</nimbus-jose-jwt.version>
         <mail.version>1.4.7</mail.version>
-        <aspectj.version>1.8.1</aspectj.version>
+        <aspectj.version>1.8.3</aspectj.version>
         <jsr250-api.version>1.0</jsr250-api.version>
         
         <hibernate.version>4.3.6.Final</hibernate.version>
@@ -241,33 +238,6 @@
             <version>${postgresql-jdbc.version}</version>
         </dependency>
         
-        <!-- Driver H2 for JUnit at DAO level -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2database.version}</version>
-            <scope>test</scope>
-        </dependency>
-        
-        <!-- Spring Test DBUnit to run DAO's test -->
-        <dependency>
-            <groupId>com.github.springtestdbunit</groupId>
-            <artifactId>spring-test-dbunit</artifactId>
-            <version>${spring-test-dbunit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.dbunit</groupId>
-            <artifactId>dbunit</artifactId>
-            <version>${dbunit.version}</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

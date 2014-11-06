@@ -126,6 +126,9 @@ module.exports = function(grunt) {
 			},
 			secure: {
 				NODE_ENV: 'secure'
+			},
+			development: {
+				NODE_ENV: 'development'
 			}
 		},
 		mochaTest: {
@@ -139,11 +142,25 @@ module.exports = function(grunt) {
 			unit: {
 				configFile: 'karma.conf.js'
 			}
+		},
+		copy: {
+			main: {
+				expand: true,
+				cwd: 'public/',
+				src: ['modules/**/views/*.html', 'modules/**/img/**'],
+				dest: 'public/dist'
+			}
+		},
+		clean: {
+			main: ['public/dist'],
+			app: ['public/dist/application.js']
 		}
 	});
 
 	// Load NPM tasks
 	require('load-grunt-tasks')(grunt);
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-clean');	
 
 	// Making grunt default to force in order not to break the project.
 	grunt.option('force', true);
@@ -153,8 +170,32 @@ module.exports = function(grunt) {
 		var init = require('./config/init')();
 		var config = require('./config/config');
 
-		grunt.config.set('applicationJavaScriptFiles', config.assets.js);
-		grunt.config.set('applicationCSSFiles', config.assets.css);
+		grunt.config.set('applicationJavaScriptFiles', config.assets.lib.js.concat(config.assets.js));
+		grunt.config.set('applicationCSSFiles', config.assets.lib.css.concat(config.assets.css));
+	});
+
+	// A Task to run swig to process the server.view.html templates
+	grunt.registerTask('runSwig', 'Task that run swig for process the view templates.', function() {
+
+		var swig  = require('swig');
+		var init = require('./config/init')();
+		var config = require('./config/config');
+
+		var variables = {
+			jsFiles: ['application.min.js'],
+			cssFiles: ['application.min.css'],
+			buildingDist: true
+		};
+
+		var indexProcessed = swig.renderFile(__dirname +'/app/views/index.server.view.html', variables);
+		grunt.file.write(__dirname + '/public/dist/index.html', indexProcessed);
+
+		var page404processed = swig.renderFile(__dirname +'/app/views/404.server.view.html', variables);
+		grunt.file.write(__dirname + '/public/dist/404.html', page404processed);
+
+		var page500processed = swig.renderFile(__dirname +'/app/views/500.server.view.html', variables);
+		grunt.file.write(__dirname + '/public/dist/500.html', page500processed);
+
 	});
 
 	// Default task(s).
@@ -169,9 +210,12 @@ module.exports = function(grunt) {
 	// Lint task(s).
 	grunt.registerTask('lint', ['jshint', 'csslint']);
 
+	// Original Build task(s).
+	//grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
+
 	// Build task(s).
-	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
+	grunt.registerTask('build', ['clean', 'lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'runSwig', 'copy', 'clean:app']);
 
 	// Test task.
-	grunt.registerTask('test', ['env:test', 'karma:unit']);
+	grunt.registerTask('test', ['env:development', 'karma:unit']);
 };

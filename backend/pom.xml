@@ -323,13 +323,12 @@
 				<configuration>
 					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
                     <warName>${project.build.finalName}</warName>
-                    <!-- TODO: descomentar cuando este el FrontEnd -->
-<!--                     <webResources> -->
-<!-- 			            <resource> -->
-<!-- 			              this is relative to the pom.xml directory -->
-<!-- 			              <directory>${frontend.basedir}/public/dist</directory> -->
-<!-- 			            </resource> -->
-<!-- 			        </webResources> -->
+                    <webResources>
+			            <resource>
+						  <!-- this is relative to the pom.xml directory -->
+			              <directory>${frontend.basedir}/public/dist</directory>
+			            </resource>
+			        </webResources>
 				</configuration>
 			</plugin>
 			

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="internalServerErrorFactory" class="net.volkno.archetype.cnea.trazabilidad.backend.service.exception.InternalServerErrorFactory">
+        <property name="exceptionMapping">
+            <map>
+                <entry key="Unknown">
+                	<bean class="net.volkno.archetype.cnea.trazabilidad.backend.service.exception.InternalServerError">
+                		<property name="code" value="1" />
+                		<property name="message" value="Hubo un error inesperado" />
+                	</bean>
+                </entry>
+                <entry key="org.springframework.dao.DataIntegrityViolationException">
+                	<bean class="net.volkno.archetype.cnea.trazabilidad.backend.service.exception.InternalServerError">
+                		<property name="code" value="2" />
+                		<property name="message" value="Hubo una violación de integridad de datos" />
+                	</bean>
+                </entry>
+                <entry key="net.volkno.archetype.cnea.trazabilidad.backend.service.exception.ChangePasswordException">
+                	<bean class="net.volkno.archetype.cnea.trazabilidad.backend.service.exception.InternalServerError">
+                		<property name="code" value="3" />
+                		<property name="message" value="Hubo un error al cambiar el password" />
+                	</bean>
+                </entry>
+                <entry key="net.volkno.archetype.cnea.trazabilidad.backend.service.exception.AuthenticationException">
+                	<bean class="net.volkno.archetype.cnea.trazabilidad.backend.service.exception.InternalServerError">
+                		<property name="code" value="4" />
+                		<property name="message" value="Usuario o password inválido" />
+                	</bean>
+                </entry>
+                <entry key="net.volkno.archetype.cnea.trazabilidad.backend.service.exception.RefreshTokenException">
+                	<bean class="net.volkno.archetype.cnea.trazabilidad.backend.service.exception.InternalServerError">
+                		<property name="code" value="5" />
+                		<property name="message" value="Hubo un error al querer refrescar el token" />
+                	</bean>
+                </entry>
+                <entry key="net.volkno.archetype.cnea.trazabilidad.backend.service.exception.ForbiddenException">
+                	<bean class="net.volkno.archetype.cnea.trazabilidad.backend.service.exception.InternalServerError">
+                		<property name="code" value="6" />
+                		<property name="message" value="El usuario ingresado no está autorizado para acceder al sistema de trazabilidad" />
+                	</bean>
+				</entry>
+                <entry key="org.springframework.transaction.TransactionSystemException">
+                	<bean class="net.volkno.archetype.cnea.trazabilidad.backend.service.exception.InternalServerError">
+                		<property name="code" value="7" />
+                		<property name="message" value="Hubo una error al hacer commit de los datos. Probablemente se deba a una violación de integridad. Consulte el log para más detalle." />
+                	</bean>
+				</entry>				
+            </map>
+        </property>
+    </bean>
+
+    <bean id="restResponseHandler" class="net.volkno.archetype.cnea.trazabilidad.backend.util.RestResponseHandler" />
+
+</beans>

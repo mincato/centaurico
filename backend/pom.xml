@@ -1,0 +1,395 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.volkno.archetypes.cnea.trazabilidad</groupId>
+    <artifactId>archetype-backend</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>cnea-trazabilidad-archetype</name>
+
+    <properties>
+    	<frontend.basedir>../frontend</frontend.basedir>
+    
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.war.plugin.version>2.1</maven.war.plugin.version>
+        <yeoman.maven.plugin.version>0.2</yeoman.maven.plugin.version>
+
+        <junit.version>4.11</junit.version>
+        <mockito.version>1.9.5</mockito.version>
+        <log4j.version>1.2.17</log4j.version>
+        <h2database.version>1.4.180</h2database.version>        
+        <dbunit.version>2.5.0</dbunit.version>
+        <spring-test-dbunit.version>1.1.0</spring-test-dbunit.version>
+        
+        <servlet.version>3.0.1</servlet.version>
+        <cxf.version>2.7.6</cxf.version>
+        <spring.version>4.0.6.RELEASE</spring.version>
+        <spring-data-jpa.version>1.6.2.RELEASE</spring-data-jpa.version>
+        <spring-ldap-core.version>2.0.2.RELEASE</spring-ldap-core.version>
+        <jackson.version>1.9.13</jackson.version>
+        
+        <commons-lang.version>2.6</commons-lang.version>
+        <commons-collection.version>3.2.1</commons-collection.version>
+        <commons-beanutils.version>1.9.2</commons-beanutils.version>
+        <commonsio.version>2.4</commonsio.version>
+        
+        <postgresql-jdbc.version>9.1-901.jdbc4</postgresql-jdbc.version>
+        <commons-dbcp.version>1.4</commons-dbcp.version>        
+
+        <slf4j.version>1.7.5</slf4j.version>
+        <nimbus-jose-jwt.version>2.26.1</nimbus-jose-jwt.version>
+        <mail.version>1.4.7</mail.version>
+        <aspectj.version>1.8.1</aspectj.version>
+        <jsr250-api.version>1.0</jsr250-api.version>
+        
+        <hibernate.version>4.3.6.Final</hibernate.version>
+        <hibernate-jpa-2.1-api.version>1.0.0.Final</hibernate-jpa-2.1-api.version>
+        <hibernate-validator.version>5.1.2.Final</hibernate-validator.version>
+            
+    </properties>
+    
+	<dependencyManagement>
+		<dependencies>
+		
+			<!-- It is possible to accidentally mix different versions of Spring JARs when using Maven.
+			For example, you may find that a third-party library, or another Spring project, pulls in a
+			transitive dependency to an older release. If you forget to explicitly declare a direct
+			dependency yourself, all sorts of unexpected issues can arise.
+
+			To overcome such problems Maven supports the concept of a "bill of materials" (BOM) dependency.
+			You can import the spring-framework-bom in your dependencyManagement section to ensure that all
+			spring dependencies (both direct and transitive) are at the same version. -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-framework-bom</artifactId>
+				<version>${spring.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>    
+
+    <dependencies>
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>        
+        </dependency>       
+
+        <!-- Apache Log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <!-- Servlet 3.1 Specification for Tomcat 8 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
+        
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-servlet_3.0_spec</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Apache CXF -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <version>${cxf.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.geronimo.specs</groupId>
+                    <artifactId>geronimo-javamail_1.4_spec</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-security-oauth2</artifactId>
+            <version>${cxf.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.geronimo.specs</groupId>
+                    <artifactId>geronimo-servlet_3.0_spec</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- JSON Provider -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- Spring Framework -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring-data-jpa.version}</version>
+		</dependency>        
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency>
+		
+		<!-- Spring LDAP => Para autenticar con Active Directory -->
+		<dependency>
+			<groupId>org.springframework.ldap</groupId>
+			<artifactId>spring-ldap-core</artifactId>
+			<version>${spring-ldap-core.version}</version>
+		</dependency>
+		
+		<!-- AspectJ Tools -->        
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+		
+		<!-- Hibernate dependencies -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+			<version>${hibernate-jpa-2.1-api.version}</version>
+		</dependency>
+		<!-- Hibernate Envers-->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-envers</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<!-- Hibernate Validators -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>		
+
+
+        <!-- Apache Commons -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons-lang.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collection.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>${commons-dbcp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>${commons-beanutils.version}</version>
+        </dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commonsio.version}</version>
+		</dependency>
+
+        <!-- Driver PostgreSQL -->
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql-jdbc.version}</version>
+        </dependency>
+        
+        <!-- Driver H2 for JUnit at DAO level -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2database.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- Spring Test DBUnit to run DAO's test -->
+        <dependency>
+            <groupId>com.github.springtestdbunit</groupId>
+            <artifactId>spring-test-dbunit</artifactId>
+            <version>${spring-test-dbunit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>${dbunit.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        
+        <!-- For JWT authentication -->
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>${nimbus-jose-jwt.version}</version>
+        </dependency>     
+        
+		<!-- JavaMail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>${mail.version}</version>
+        </dependency>
+        
+		<!-- JSR250 API for @RolesAllowed annotation -->        
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>jsr250-api</artifactId>
+			<version>${jsr250-api.version}</version>
+		</dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>${project.name}</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven.war.plugin.version}</version>
+				<configuration>
+					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+                    <warName>${project.build.finalName}</warName>
+                    <!-- TODO: descomentar cuando este el FrontEnd -->
+<!--                     <webResources> -->
+<!-- 			            <resource> -->
+<!-- 			              this is relative to the pom.xml directory -->
+<!-- 			              <directory>${frontend.basedir}/public/dist</directory> -->
+<!-- 			            </resource> -->
+<!-- 			        </webResources> -->
+				</configuration>
+			</plugin>
+			
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/SpringLDAPTest.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>			
+
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<username>admin</username>
+					<password>admin</password>
+				</configuration>
+			</plugin>			
+
+        </plugins>
+    </build>
+
+	<profiles>
+		<profile>
+			<id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>			
+		</profile>
+		<profile>
+			<id>grunt-build</id>
+			<build>
+				<plugins>
+		 			<plugin>
+						<groupId>com.github.trecloux</groupId>
+						<artifactId>yeoman-maven-plugin</artifactId>
+						<version>${yeoman.maven.plugin.version}</version>
+						<configuration>
+							<yeomanProjectDirectory>${frontend.basedir}</yeomanProjectDirectory>
+						</configuration>
+						<executions>
+							<execution>
+								<id>run-grunt</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>build</goal>
+								</goals>
+								<configuration>
+									<gruntBuildArgs>build</gruntBuildArgs>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>

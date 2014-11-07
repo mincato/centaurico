@@ -13,6 +13,16 @@ El Front-End está preparado para correr en un Node.js, con el fin de que en un 
 
 El Back-End es una aplicación Java, armada con Maven, que expone servicios REST con JAX-RS (Apache CXF) y utiliza Spring + MongoDB. Para deployar el Front-End más el Back-End en un Tomcat, el perfil "grunt-build" de Maven se encarga de empaquetar todo en un único WAR listo para copiar a la carpeta "webapps" del contenedor de Servlets.
 
+¡IMPORTANTE!
+=============
+
+Si no se construyó nunca el frontend, es necesario que se descarguen todos los node_modules. Parado en el ROOT del proyecto frontend, ejecutar primero el siguiente comando:
+
+> npm install
+
+Esto sólo debe hacerse una vez, o todas las veces que haya habido cambios de librerías en el frontend.
+
+
 Para desplegar la aplicación web en Tomcat:
 ===========================================
 

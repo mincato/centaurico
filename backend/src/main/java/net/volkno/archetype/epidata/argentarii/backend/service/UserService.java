@@ -43,8 +43,8 @@ public class UserService {
         return user;
     }
     
-    public User findByNtUser(String ntUser) {
-        User user = userDAO.findByNtUser(ntUser);
+    public User findByUsername(String ntUser) {
+        User user = userDAO.findByUsername(ntUser);
         return user;
     }
     
@@ -56,7 +56,7 @@ public class UserService {
             throw new AuthenticationException();
         }
         
-        User user = findByNtUser(nick);
+        User user = findByUsername(nick);
         if (user == null) {
             //throw new AuthenticationException("User does not exists!");
             throw new ForbiddenException();
@@ -66,7 +66,6 @@ public class UserService {
     
     @Transactional
     public User register(User newUser) {
-    	newUser.setNtUser(newUser.getUsername());
         User createdUser = addUser(newUser);
         return createdUser;
     }

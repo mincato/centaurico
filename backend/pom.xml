@@ -25,8 +25,7 @@
         <servlet.version>3.1.0</servlet.version>
         <cxf.version>2.7.13</cxf.version>
         <spring.version>4.1.1.RELEASE</spring.version>
-        <spring-data-jpa.version>1.6.2.RELEASE</spring-data-jpa.version>
-        <spring-ldap-core.version>2.0.2.RELEASE</spring-ldap-core.version>
+        <spring-data-mongodb.version>1.6.1.RELEASE</spring-data-mongodb.version>
         <jackson.version>1.9.13</jackson.version>
         
         <commons-lang.version>2.6</commons-lang.version>
@@ -43,10 +42,6 @@
         <aspectj.version>1.8.3</aspectj.version>
         <jsr250-api.version>1.0</jsr250-api.version>
         
-        <hibernate.version>4.3.6.Final</hibernate.version>
-        <hibernate-jpa-2.1-api.version>1.0.0.Final</hibernate-jpa-2.1-api.version>
-        <hibernate-validator.version>5.1.2.Final</hibernate-validator.version>
-            
     </properties>
     
 	<dependencyManagement>
@@ -151,19 +146,12 @@
         </dependency>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>${spring-data-jpa.version}</version>
-		</dependency>        
-		<dependency>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>${spring-data-mongodb.version}</version>
+		</dependency>
+  		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
-		</dependency>
-		
-		<!-- Spring LDAP => Para autenticar con Active Directory -->
-		<dependency>
-			<groupId>org.springframework.ldap</groupId>
-			<artifactId>spring-ldap-core</artifactId>
-			<version>${spring-ldap-core.version}</version>
 		</dependency>
 		
 		<!-- AspectJ Tools -->        
@@ -172,37 +160,6 @@
 			<artifactId>aspectjtools</artifactId>
 			<version>${aspectj.version}</version>
 		</dependency>
-		
-		<!-- Hibernate dependencies -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate.version}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-core</artifactId>
-		    <version>${hibernate.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.1-api</artifactId>
-			<version>${hibernate-jpa-2.1-api.version}</version>
-		</dependency>
-		<!-- Hibernate Envers-->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-envers</artifactId>
-			<version>${hibernate.version}</version>
-		</dependency>
-		<!-- Hibernate Validators -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>${hibernate-validator.version}</version>
-		</dependency>		
-
 
         <!-- Apache Commons -->
         <dependency>
@@ -302,16 +259,6 @@
 				</configuration>
 			</plugin>
 			
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>**/SpringLDAPTest.java</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>			
-
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>

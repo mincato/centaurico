@@ -2,8 +2,8 @@ package net.volkno.archetype.epidata.argentarii.backend.repository;
 
 import net.volkno.archetype.epidata.argentarii.backend.model.tipo.TipoMaterial;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface TipoMaterialRepository extends JpaRepository<TipoMaterial, String> {
+public interface TipoMaterialRepository extends MongoRepository<TipoMaterial, String> {
 
 }

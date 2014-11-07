@@ -1,24 +1,31 @@
 package net.volkno.archetype.epidata.argentarii.backend.model.tipo;
 
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import net.volkno.archetype.epidata.argentarii.backend.model.BackEndEntity;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
-import org.hibernate.envers.Audited;
 
-@Entity
-@Table(name = "tipo_materiales")
-@SQLDelete(sql = "UPDATE TipoMaterial SET state = '0' WHERE id = ?")
-@Where(clause = "state <> '0'")
-@PrimaryKeyJoinColumn(name = "tipo_id")
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Audited
-public class TipoMaterial extends Tipo {
+public class TipoMaterial extends BackEndEntity {
 
-    private static final long serialVersionUID = -5400247113612164203L;
+	private static final long serialVersionUID = 1033348952152982832L;
+	
+	private String codigo;
+	private String valor;
+	
+	public String getCodigo() {
+		return codigo;
+	}
+	
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	
+	public String getValor() {
+		return valor;
+	}
+	
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
 
-    
 }

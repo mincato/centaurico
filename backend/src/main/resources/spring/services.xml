@@ -21,7 +21,6 @@
     <import resource="profiles.xml" />    
     <import resource="commons.xml" />        
     <import resource="security-jwt.xml" />
-    <import resource="security-ldap.xml" />
     <import resource="database.xml"/>
     <import resource="errors.xml" />
     
@@ -36,7 +35,6 @@
             <ref bean="helloRestService" />
             <ref bean="uploadDocRestService" />
             <ref bean="tipoMaterialRestService" />
-            <ref bean="materialRestService" />
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean="jsonProvider" />

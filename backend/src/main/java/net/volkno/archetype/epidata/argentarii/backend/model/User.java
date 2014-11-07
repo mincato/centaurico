@@ -3,27 +3,13 @@ package net.volkno.archetype.epidata.argentarii.backend.model;
 import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
 import net.volkno.archetype.epidata.argentarii.backend.util.GenericPredicate;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
-import org.hibernate.envers.Audited;
 
-@Entity
-@Table(name = "users")
-@SQLDelete(sql="UPDATE User SET state = '0' WHERE id = ?")
-@Where(clause="state = '2'")
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Audited
 public class User extends BackEndEntity {
 
     private static final long serialVersionUID = 1294418189803999949L;
@@ -34,15 +20,11 @@ public class User extends BackEndEntity {
     private String lastName;
     private String email;
     
-    @Transient
     private String password;
     
     private String language;
     private String token;
     
-    private String ntUser; //FIXME: debería ser transient quizas, para que no se serialice
-    
-    @ManyToMany(fetch = FetchType.EAGER)
     private List<Rol> roles;
 
 	public String getUsername() {
@@ -108,20 +90,6 @@ public class User extends BackEndEntity {
 	public void setToken(String token) {
 		this.token = token;
 	}
-
-    /**
-     * @return the ntUser
-     */
-    public String getNtUser() {
-        return ntUser;
-    }
-
-    /**
-     * @param ntUser the ntUser to set
-     */
-    public void setNtUser(String ntUser) {
-        this.ntUser = ntUser;
-    }
 
     public List<Rol> getRoles() {
         return roles;

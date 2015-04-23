@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/archetype-frontend-test',
+	db: 'mongodb://localhost/desitank-fe-frontend-test',
 	port: 3001,
 	app: {
-		title: 'archetype-frontend - Test Environment'
+		title: 'desitank-fe-frontend - Test Environment'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

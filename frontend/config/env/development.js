@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/archetype-frontend-dev',
+	db: 'mongodb://localhost/desitank-fe-frontend-dev',
 	app: {
-		title: 'archetype-frontend - Development Environment'
+		title: 'desitank-fe-frontend - Development Environment'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

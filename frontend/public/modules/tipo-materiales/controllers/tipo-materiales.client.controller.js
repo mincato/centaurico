@@ -1,13 +1,13 @@
 'use strict';
 
 // Tipo materiales controller
-angular.module('tipo-materiales').controller('TipoMaterialesController', ['$scope', '$stateParams', '$location', 'TipoMateriales',
-	function($scope, $stateParams, $location, TipoMateriales) {
+angular.module('tipo-materiales').controller('TipoMaterialController', ['$scope', '$stateParams', '$location', 'TipoMaterialService',
+	function($scope, $stateParams, $location, TipoMaterialService) {
 
 		// Create new Tipo materiale
 		$scope.create = function() {
 			// Create new Tipo materiale object
-			var tipoMateriale = new TipoMateriales ({
+			var tipoMateriale = new TipoMaterialService ({
 				codigo: this.codigo,
 				valor: this.valor
 			});
@@ -54,12 +54,12 @@ angular.module('tipo-materiales').controller('TipoMaterialesController', ['$scop
 
 		// Find a list of Tipo materiales
 		$scope.find = function() {
-			$scope.tipoMateriales = TipoMateriales.query();
+			$scope.tipoMateriales = TipoMaterialService.query();
 		};
 
 		// Find existing Tipo materiale
 		$scope.findOne = function() {
-			$scope.tipoMateriale = TipoMateriales.get({ 
+			$scope.tipoMateriale = TipoMaterialService.get({
 				tipoMaterialeId: $stateParams.tipoMaterialeId
 			});
 		};

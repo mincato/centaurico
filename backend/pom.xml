@@ -2,11 +2,11 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>net.volkno.archetypes.epidata.argentarii</groupId>
-    <artifactId>archetype-backend</artifactId>
+    <groupId>ar.com.desitank.fe</groupId>
+    <artifactId>fe-backend</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>epidata-argentarii-archetype</name>
+    <name>Desitank Factura Electronica</name>
 
     <properties>
     	<frontend.basedir>../frontend</frontend.basedir>
@@ -230,7 +230,7 @@
     </dependencies>
 
     <build>
-        <finalName>${project.name}</finalName>
+        <finalName>desitank-fe</finalName>
 
         <plugins>
             <plugin>

@@ -3,15 +3,15 @@
 ### Proyectos ###
 
 * Frontend: AngularJS
-* Backend: Java (Spring) + MongoDB
+* Backend: Java (Spring) + MyBatis
 
 Descripción:
 ============
-Este proyecto es un arquetipo para Argentarii. En este proyecto se crea una capa de persistencia con el conector MongoDB para Java.
+Este proyecto es un arquetipo para Desitank. En este proyecto se crea una capa de persistencia con Spring Data + MyBatis.
 
 El Front-End está preparado para correr en un Node.js, con el fin de que en un ambiente de desarrollo se pueda trabajar de forma cómoda.
 
-El Back-End es una aplicación Java, armada con Maven, que expone servicios REST con JAX-RS (Apache CXF) y utiliza Spring + MongoDB. Para deployar el Front-End más el Back-End en un Tomcat, el perfil "grunt-build" de Maven se encarga de empaquetar todo en un único WAR listo para copiar a la carpeta "webapps" del contenedor de Servlets.
+El Back-End es una aplicación Java, armada con Maven, que expone servicios REST con JAX-RS (Apache CXF) y utiliza Spring + MyBatis. Para deployar el Front-End más el Back-End en un Tomcat, el perfil "grunt-build" de Maven se encarga de empaquetar todo en un único WAR listo para copiar a la carpeta "webapps" del contenedor de Servlets.
 
 ¡IMPORTANTE!
 =============
@@ -28,9 +28,9 @@ Para desplegar la aplicación web en Tomcat:
 
 Parado sobre la carpeta backend del proyecto, ejecutar:
 
-> mvn clean package -Pgrunt-build && cp target/epidata-agentarii-archetype.war $CATALINA_HOME/webapps
+> mvn clean package -Pgrunt-build && cp target/desitank-fe.war $CATALINA_HOME/webapps
 
-Si todo sale bien, la aplicación estará disponible en localhost:8080/epidata-argentarii-archetype.
+Si todo sale bien, la aplicación estará disponible en localhost:8080/desitank-fe.
 
 Para compilar solamente el backend:
 ===================================
@@ -39,9 +39,9 @@ Cuando se está desarrollando en el Back-End Java y no hubo cambios en ningún a
 
 Parado sobre la carpeta backend del proyecto, ejecutar:
 
-> mvn clean package && cp target/epidata-argentarii-archetype.war $CATALINA_HOME/webapps
+> mvn clean package && cp target/desitank-fe.war $CATALINA_HOME/webapps
 
-Si todo sale bien, la aplicación estará disponible en localhost:8080/epidata-argentarii-archetype.war.
+Si todo sale bien, la aplicación estará disponible en localhost:8080/desitank-fe.war.
 
 Para levantar sólo el frontend y trabajar en caliente:
 =======================================================

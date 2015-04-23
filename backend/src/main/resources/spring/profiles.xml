@@ -12,7 +12,7 @@
 
     <!-- Load configuration to run the app in localhost (dev) -->
     <beans profile="localhost">
-        <context:property-placeholder location="classpath:archetype-backend-localhost.properties" ignore-unresolvable="true"/>
+        <context:property-placeholder location="classpath:backend-localhost.properties" ignore-unresolvable="true"/>
     </beans>
     
 </beans>

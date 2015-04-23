@@ -26,7 +26,7 @@
     
     <import resource="public-methods-rules.xml" />
     
-    <bean id="authorizationFilter" class="net.volkno.archetype.epidata.argentarii.backend.service.aspect.AuthorizationFilter">
+    <bean id="authorizationFilter" class="ar.com.desitank.fe.backend.service.aspect.AuthorizationFilter">
         <property name="publicMethodsRules" ref="publicMethodsRules" />
     </bean>
     
@@ -58,7 +58,7 @@
         </jaxrs:providers>
     </jaxrs:server>
 
-    <context:component-scan base-package="net.volkno.archetype.epidata.argentarii.backend"
+    <context:component-scan base-package="ar.com.desitank.fe.backend"
         annotation-config="true" />
     <context:annotation-config />
     

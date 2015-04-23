@@ -19,14 +19,14 @@ public class UserService {
 	private static final Logger LOGGER = Logger.getLogger(UserService.class );
 	
 	@Autowired
-	private UserRepository userDAO;
+	private UserRepository userRepository;
     
     private AuthenticatorService authenticatorService;
     
 	@Transactional
 	public User addUser(User newUser) {
 	    
-		newUser = userDAO.save(newUser);
+		newUser = userRepository.save(newUser);
         
         LOGGER.info("User added: " + newUser.getFirstName() + " " + newUser.getLastName());
         return newUser;
@@ -34,17 +34,17 @@ public class UserService {
 	
 	@Transactional
     public User updateUser(User user) {
-		user = userDAO.save(user);
+		user = userRepository.save(user);
         return user;
     }
 
     public User findByNick(String nick) {
-        User user = userDAO.findByUsername(nick);
+        User user = userRepository.findByUsername(nick);
         return user;
     }
     
     public User findByUsername(String ntUser) {
-        User user = userDAO.findByUsername(ntUser);
+        User user = userRepository.findByUsername(ntUser);
         return user;
     }
     

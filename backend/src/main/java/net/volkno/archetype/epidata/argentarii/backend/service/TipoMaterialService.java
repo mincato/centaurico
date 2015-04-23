@@ -12,29 +12,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class TipoMaterialService {
 
-	@Autowired
-	private TipoMaterialRepository tipoMaterialRepository;
+    @Autowired
+    private TipoMaterialRepository tipoMaterialRepository;
 
-	@Transactional
-	public TipoMaterial createTipoMaterial(TipoMaterial tipoMaterial) {
-		return tipoMaterialRepository.save(tipoMaterial);
-	}
-	
-	public List<TipoMaterial> getAll() {
-		return tipoMaterialRepository.findAll();
-	}
+    @Transactional
+    public void createTipoMaterial(TipoMaterial tipoMaterial) {
+        tipoMaterialRepository.save(tipoMaterial);
+    }
 
-	@Transactional
-	public TipoMaterial update(TipoMaterial tipoMaterial) {
-		return tipoMaterialRepository.save(tipoMaterial); 
-	}
+    public List<TipoMaterial> getAll() {
+        return tipoMaterialRepository.findAll();
+    }
 
-	public TipoMaterial find(String id) {
-		return tipoMaterialRepository.findOne(id);
-	}
+    @Transactional
+    public void update(TipoMaterial tipoMaterial) {
+        tipoMaterialRepository.save(tipoMaterial);
+    }
 
-	public void delete(TipoMaterial tipoMaterial) {
-		tipoMaterialRepository.delete(tipoMaterial);
-	}
-	
+    public TipoMaterial find(String id) {
+        return tipoMaterialRepository.findOne(id);
+    }
+
+    public void delete(TipoMaterial tipoMaterial) {
+        tipoMaterialRepository.delete(tipoMaterial);
+    }
+
 }

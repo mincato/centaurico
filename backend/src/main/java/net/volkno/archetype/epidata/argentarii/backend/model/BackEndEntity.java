@@ -1,23 +1,21 @@
 package net.volkno.archetype.epidata.argentarii.backend.model;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.springframework.data.annotation.Id;
 
 public abstract class BackEndEntity extends BackEndObject {
 
     private static final long serialVersionUID = -5354058460706112830L;
 
-    @Id
     @JsonProperty("_id")
-    private String id;
+    private Long id;
 
     private EntityState state = EntityState.ACTIVE;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

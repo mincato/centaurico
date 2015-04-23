@@ -19,13 +19,16 @@
         <yeoman.maven.plugin.version>0.2</yeoman.maven.plugin.version>
 
         <junit.version>4.11</junit.version>
-        <mockito.version>1.10.8</mockito.version>
+        <mockito.version>1.10.19</mockito.version>
         <log4j.version>1.2.17</log4j.version>
+        
+        <h2database.version>1.3.175</h2database.version>
+        <dbunit.version>2.4.9</dbunit.version>
+        <spring-test-dbunit.version>1.0.1</spring-test-dbunit.version>
         
         <servlet.version>3.1.0</servlet.version>
         <cxf.version>2.7.13</cxf.version>
-        <spring.version>4.1.1.RELEASE</spring.version>
-        <spring-data-mongodb.version>1.6.1.RELEASE</spring-data-mongodb.version>
+        <spring.version>4.1.6.RELEASE</spring.version>
         <jackson.version>1.9.13</jackson.version>
         
         <commons-lang.version>2.6</commons-lang.version>
@@ -34,7 +37,9 @@
         <commonsio.version>2.4</commonsio.version>
         
         <postgresql-jdbc.version>9.1-901.jdbc4</postgresql-jdbc.version>
-        <commons-dbcp.version>1.4</commons-dbcp.version>        
+        <c3p0.version>0.9.5</c3p0.version>
+        <mybatis.version>3.2.8</mybatis.version>
+        <mybatis-spring.version>1.2.2</mybatis-spring.version>
 
         <slf4j.version>1.7.5</slf4j.version>
         <nimbus-jose-jwt.version>2.26.1</nimbus-jose-jwt.version>
@@ -46,15 +51,6 @@
     
 	<dependencyManagement>
 		<dependencies>
-		
-			<!-- It is possible to accidentally mix different versions of Spring JARs when using Maven.
-			For example, you may find that a third-party library, or another Spring project, pulls in a
-			transitive dependency to an older release. If you forget to explicitly declare a direct
-			dependency yourself, all sorts of unexpected issues can arise.
-
-			To overcome such problems Maven supports the concept of a "bill of materials" (BOM) dependency.
-			You can import the spring-framework-bom in your dependencyManagement section to ensure that all
-			spring dependencies (both direct and transitive) are at the same version. -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-framework-bom</artifactId>
@@ -144,11 +140,10 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-mongodb</artifactId>
-			<version>${spring-data-mongodb.version}</version>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
   		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
@@ -173,11 +168,6 @@
             <version>${commons-collection.version}</version>
         </dependency>
         <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>${commons-dbcp.version}</version>
-        </dependency>
-        <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
             <version>${commons-beanutils.version}</version>
@@ -195,6 +185,46 @@
             <version>${postgresql-jdbc.version}</version>
         </dependency>
         
+        <!-- C3P0 Connection Pool -->
+        <dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+            <version>${c3p0.version}</version>
+        </dependency>
+        
+        <!-- MyBatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${mybatis-spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+        
+        <!-- Spring Test DBUnit to run DAO's test -->
+        <dependency>
+            <groupId>com.github.springtestdbunit</groupId>
+            <artifactId>spring-test-dbunit</artifactId>
+            <version>${spring-test-dbunit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>${dbunit.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>        
+        
+        <!-- sl4j to log -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -226,6 +256,14 @@
 			<artifactId>jsr250-api</artifactId>
 			<version>${jsr250-api.version}</version>
 		</dependency>
+		
+        <!-- Driver H2 for JUnit at DAO level -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2database.version}</version>
+            <scope>test</scope>
+        </dependency>		
 
     </dependencies>
 

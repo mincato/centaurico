@@ -38,8 +38,8 @@ public class TipoMaterialRestService {
 	@POST
 	public Response createTipoMaterial(@Context HttpServletRequest request, TipoMaterial tipoMaterial) {
         try {
-        	tipoMaterial = tipoMaterialService.createTipoMaterial(tipoMaterial);
-            return responseHandler.buildSuccessResponse(tipoMaterial, Status.CREATED);
+        	tipoMaterialService.createTipoMaterial(tipoMaterial);
+            return responseHandler.buildSuccessResponse(Status.CREATED);
         } catch (Exception e) {
             return responseHandler.buildErrorResponse(e);
         }
@@ -49,8 +49,8 @@ public class TipoMaterialRestService {
     @Path("{id}")
     public Response updateTipoMaterial(@Context HttpServletRequest request, TipoMaterial tipoMaterial) {
         try {
-        	tipoMaterial = tipoMaterialService.update(tipoMaterial);
-            return responseHandler.buildSuccessResponse(tipoMaterial, Status.ACCEPTED);
+        	tipoMaterialService.update(tipoMaterial);
+            return responseHandler.buildSuccessResponse(Status.ACCEPTED);
         } catch (Exception e) {
             return responseHandler.buildErrorResponse(e);
         }            

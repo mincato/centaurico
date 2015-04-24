@@ -38,8 +38,8 @@ public class TipoMaterialRestService {
 	@POST
 	public Response createTipoMaterial(@Context HttpServletRequest request, TipoMaterial tipoMaterial) {
         try {
-        	tipoMaterialService.createTipoMaterial(tipoMaterial);
-            return responseHandler.buildSuccessResponse(Status.CREATED);
+        	tipoMaterial = tipoMaterialService.createTipoMaterial(tipoMaterial);
+            return responseHandler.buildSuccessResponse(tipoMaterial, Status.CREATED);
         } catch (Exception e) {
             return responseHandler.buildErrorResponse(e);
         }
@@ -49,8 +49,8 @@ public class TipoMaterialRestService {
     @Path("{id}")
     public Response updateTipoMaterial(@Context HttpServletRequest request, TipoMaterial tipoMaterial) {
         try {
-        	tipoMaterialService.update(tipoMaterial);
-            return responseHandler.buildSuccessResponse(Status.ACCEPTED);
+        	tipoMaterial = tipoMaterialService.update(tipoMaterial);
+            return responseHandler.buildSuccessResponse(tipoMaterial, Status.ACCEPTED);
         } catch (Exception e) {
             return responseHandler.buildErrorResponse(e);
         }            
@@ -58,10 +58,9 @@ public class TipoMaterialRestService {
  
     @DELETE
     @Path("{id}")
-    public Response deleteTipoMaterial(@Context HttpServletRequest request, @PathParam("id") String id) {
-        try {
-            TipoMaterial tipoMaterial = tipoMaterialService.find(id);
-            tipoMaterialService.delete(tipoMaterial);
+    public Response deleteTipoMaterial(@Context HttpServletRequest request, @PathParam("id") Long id) {
+        try {            
+            tipoMaterialService.delete(id);
             return responseHandler.buildSuccessResponse(Status.ACCEPTED);
         } catch (Exception e) {
             return responseHandler.buildErrorResponse(e);
@@ -70,7 +69,7 @@ public class TipoMaterialRestService {
     
     @GET
     @Path("{id}")
-    public Response getMaterial(@Context HttpServletRequest request, @PathParam("id") String id) {
+    public Response getMaterial(@Context HttpServletRequest request, @PathParam("id") Long id) {
         try {
             TipoMaterial tipoMaterial = tipoMaterialService.find(id);
             return responseHandler.buildSuccessResponse(tipoMaterial, Status.OK);

@@ -149,18 +149,63 @@ module.exports = function(grunt) {
 				cwd: 'public/',
 				src: ['modules/**/views/*.html', 'modules/**/img/**'],
 				dest: 'public/dist'
-			}
+			},
+            fontsAwesome: {
+                expand: true,
+                cwd: 'public/lib/components-font-awesome/',
+                src: ['fonts/**'],
+                dest: 'public/dist'
+            },
+            fontsBootstrap: {
+                expand: true,
+                cwd: 'public/lib/bootstrap/',
+                src: ['fonts/**'],
+                dest: 'public/dist'
+            }
 		},
 		clean: {
 			main: ['public/dist'],
 			app: ['public/dist/application.js']
-		}
+		},
+        less: {
+            production: {
+                options: {
+                    compress: false,
+                    yuicompress: false,
+                    modifyVars: {
+                        'fa-font-path': 'fonts',
+                        'icon-font-path': '~"fonts/"'
+                    }
+                },
+                files: {
+                      // target.css file: source.less file
+                      'public/lib/components-font-awesome/css/font-awesome.css': 'public/lib/components-font-awesome/less/font-awesome.less',
+                      'public/lib/bootstrap/dist/css/bootstrap.css': 'public/lib/bootstrap/less/bootstrap.less'
+                }
+            },
+            development: {
+                options: {
+                    compress: false,
+                    yuicompress: false,
+                    modifyVars: {
+                        'fa-font-path': '~"../fonts"',
+                        'icon-font-path': '~"../fonts/"'
+                    }
+                },
+                files: {
+                      // target.css file: source.less file
+                      'public/lib/components-font-awesome/css/font-awesome.css': 'public/lib/components-font-awesome/less/font-awesome.less',
+                      'public/lib/bootstrap/dist/css/bootstrap.css': 'public/lib/bootstrap/less/bootstrap.less'
+                }
+            }
+        }        
 	});
 
 	// Load NPM tasks
 	require('load-grunt-tasks')(grunt);
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-clean');	
+	grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-less');
 
 	// Making grunt default to force in order not to break the project.
 	grunt.option('force', true);
@@ -199,7 +244,7 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['lint', 'test', 'concurrent:default']);
+	grunt.registerTask('default', ['less:development', 'lint', 'test', 'concurrent:default']);
 
 	// Debug task.
 	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
@@ -214,7 +259,7 @@ module.exports = function(grunt) {
 	//grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['clean', 'lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'runSwig', 'copy', 'clean:app']);
+	grunt.registerTask('build', ['less:production', 'clean', 'lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin', 'runSwig', 'copy', 'clean:app']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:development', 'karma:unit']);

@@ -26,7 +26,7 @@ public class UserService {
 	@Transactional
 	public User addUser(User newUser) {
 	    
-		newUser = userRepository.save(newUser);
+		newUser = userRepository.create(newUser);
         
         LOGGER.info("User added: " + newUser.getFirstName() + " " + newUser.getLastName());
         return newUser;
@@ -34,7 +34,7 @@ public class UserService {
 	
 	@Transactional
     public User updateUser(User user) {
-		user = userRepository.save(user);
+		user = userRepository.create(user);
         return user;
     }
 

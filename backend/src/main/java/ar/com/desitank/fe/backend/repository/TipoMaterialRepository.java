@@ -12,17 +12,21 @@ import ar.com.desitank.fe.backend.model.tipo.TipoMaterial;
 
 public interface TipoMaterialRepository {
 
-    @Delete("DELETE FROM tipo_materiales WHERE id = #{tipoMaterial.id}")
+    @Delete("DELETE FROM tipo_materiales WHERE id = #{id}")
     void delete(TipoMaterial tipoMaterial);
 
     @Select("SELECT * FROM tipo_materiales")
     List<TipoMaterial> findAll();
 
-    @Insert("INSERT INTO tipo_materiales (codigo, valor) " + "VALUES (#{codigo}, #{valor})")
+    @Insert("INSERT INTO tipo_materiales (codigo, valor) VALUES (#{codigo}, #{valor})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    void save(TipoMaterial tipoMaterial);
+    void create(TipoMaterial tipoMaterial);
 
     @Select("SELECT * FROM tipo_materiales WHERE id = #{id}")
-    TipoMaterial findOne(@Param("id") String id);
+    TipoMaterial findOne(@Param("id") Long id);
+
+    @Insert("UPDATE tipo_materiales SET codigo = #{codigo}, valor = #{valor} WHERE id = #{id}")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    void update(TipoMaterial tipoMaterial);
 
 }

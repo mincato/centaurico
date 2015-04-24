@@ -24,7 +24,7 @@ public class SessionHandler {
     	session.setAttribute(token, user);
     }
 
-    public User loadUserFromSession(HttpServletRequest request, String token, String userId) {
+    public User loadUserFromSession(HttpServletRequest request, String token, Long userId) {
     	User user = null;    	
     	HttpSession session = request.getSession();
     	if (session != null) {

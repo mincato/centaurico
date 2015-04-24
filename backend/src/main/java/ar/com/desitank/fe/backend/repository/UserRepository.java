@@ -13,11 +13,11 @@ public interface UserRepository {
     User findByUsername(@Param("username") String username);
 
     @Select("SELECT * FROM users WHERE userId = #{userId}")
-    User findOne(@Param("userId") String userId);
+    User findOne(@Param("userId") Long userId);
 
     @Insert("INSERT INTO users (username, firstName, middleName, lastName, email) "
             + "VALUES (#{username}, #{firstName}, #{middleName}, #{lastName}, #{email})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    User save(User user);
+    User create(User user);
 
 }

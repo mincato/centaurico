@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.desitank.fe.backend.model.tipo.TipoMaterial;
 import ar.com.desitank.fe.backend.repository.TipoMaterialRepository;
+import ar.com.desitank.fe.backend.service.exception.NotFoundException;
 
 @Service
 public class TipoMaterialService {
@@ -16,8 +17,9 @@ public class TipoMaterialService {
     private TipoMaterialRepository tipoMaterialRepository;
 
     @Transactional
-    public void createTipoMaterial(TipoMaterial tipoMaterial) {
-        tipoMaterialRepository.save(tipoMaterial);
+    public TipoMaterial createTipoMaterial(TipoMaterial tipoMaterial) {
+        tipoMaterialRepository.create(tipoMaterial);
+        return find(tipoMaterial.getId());
     }
 
     public List<TipoMaterial> getAll() {
@@ -25,15 +27,21 @@ public class TipoMaterialService {
     }
 
     @Transactional
-    public void update(TipoMaterial tipoMaterial) {
-        tipoMaterialRepository.save(tipoMaterial);
+    public TipoMaterial update(TipoMaterial tipoMaterial) {
+        tipoMaterialRepository.update(tipoMaterial);
+        return find(tipoMaterial.getId());
     }
 
-    public TipoMaterial find(String id) {
-        return tipoMaterialRepository.findOne(id);
+    public TipoMaterial find(Long id) {
+        TipoMaterial tipoMaterial = tipoMaterialRepository.findOne(id);
+        if (tipoMaterial == null) {
+            throw new NotFoundException();
+        }
+        return tipoMaterial;
     }
 
-    public void delete(TipoMaterial tipoMaterial) {
+    public void delete(Long id) {
+        TipoMaterial tipoMaterial = find(id);
         tipoMaterialRepository.delete(tipoMaterial);
     }
 

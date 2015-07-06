@@ -7,7 +7,7 @@
 
 Descripción:
 ============
-Este proyecto es un arquetipo para Desitank. En este proyecto se crea una capa de persistencia con Spring Data + MyBatis.
+Este proyecto es un arquetipo para Inclufin. En este proyecto se crea una capa de persistencia con Spring Data + MyBatis.
 
 El Front-End está preparado para correr en un Node.js, con el fin de que en un ambiente de desarrollo se pueda trabajar de forma cómoda.
 
@@ -22,15 +22,14 @@ Si no se construyó nunca el frontend, es necesario que se descarguen todos los 
 
 Esto sólo debe hacerse una vez, o todas las veces que haya habido cambios de librerías en el frontend.
 
-
 Para desplegar la aplicación web en Tomcat:
 ===========================================
 
 Parado sobre la carpeta backend del proyecto, ejecutar:
 
-> mvn clean package -Pgrunt-build && cp target/desitank-fe.war $CATALINA_HOME/webapps
+> mvn clean package -Pgrunt-build && cp target/inclufin-analytics.war $CATALINA_HOME/webapps
 
-Si todo sale bien, la aplicación estará disponible en localhost:8080/desitank-fe.
+Si todo sale bien, la aplicación estará disponible en localhost:8080/inclufin-analytics.
 
 Para compilar solamente el backend:
 ===================================
@@ -39,9 +38,9 @@ Cuando se está desarrollando en el Back-End Java y no hubo cambios en ningún a
 
 Parado sobre la carpeta backend del proyecto, ejecutar:
 
-> mvn clean package && cp target/desitank-fe.war $CATALINA_HOME/webapps
+> mvn clean package && cp target/inclufin-analytics.war $CATALINA_HOME/webapps
 
-Si todo sale bien, la aplicación estará disponible en localhost:8080/desitank-fe.war.
+Si todo sale bien, la aplicación estará disponible en localhost:8080/inclufin-analytics.war.
 
 Para levantar sólo el frontend y trabajar en caliente:
 =======================================================

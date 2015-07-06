@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/desitank-fe-frontend-dev',
+	db: 'mongodb://localhost/inclufin-analytics-frontend-dev',
 	app: {
-		title: 'desitank-fe-frontend - Development Environment'
+		title: 'inclufin-analytics-frontend - Development Environment'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

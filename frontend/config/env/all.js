@@ -2,7 +2,7 @@
 
 module.exports = {
 	app: {
-		title: 'desitank-fe-frontend',
+		title: 'inclufin-analytics-frontend',
 		description: 'Usaremos la parte de AngularJS para apuntar a un servidor externo. Para este proyecto no se utilizará la parte de Node.js.',
 		keywords: 'AngularJS'
 	},

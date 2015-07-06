@@ -1,5 +1,5 @@
 {
-  "name": "desitank-fe-frontend",
+  "name": "inclufin-analytics-frontend",
   "version": "0.0.1",
   "description": "Usaremos la parte de AngularJS para apuntar a un servidor externo. Para este proyecto no se utilizará la parte de Node.js.",
   "dependencies": {

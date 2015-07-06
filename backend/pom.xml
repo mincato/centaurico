@@ -2,19 +2,19 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ar.com.desitank.fe</groupId>
-    <artifactId>fe-backend</artifactId>
+    <groupId>ar.com.inclufin.analytics</groupId>
+    <artifactId>inclufin-analytics</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>Desitank Factura Electronica</name>
+    <name>Inclufin Analytics</name>
 
     <properties>
     	<frontend.basedir>../frontend</frontend.basedir>
     
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
         <maven.war.plugin.version>2.1</maven.war.plugin.version>
         <yeoman.maven.plugin.version>0.2</yeoman.maven.plugin.version>
 
@@ -268,7 +268,7 @@
     </dependencies>
 
     <build>
-        <finalName>desitank-fe</finalName>
+        <finalName>inclufin-analytics</finalName>
 
         <plugins>
             <plugin>

@@ -39,6 +39,6 @@
 
     <!-- scan for mappers and let them be autowired -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="ar.com.desitank.fe.backend.repository" />
+        <property name="basePackage" value="ar.com.inclufin.analytics.backend.repository" />
     </bean>
 </beans>

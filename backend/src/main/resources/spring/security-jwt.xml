@@ -9,7 +9,7 @@
         http://cxf.apache.org/jaxrs                     http://cxf.apache.org/schemas/jaxrs.xsd
         http://www.springframework.org/schema/util      http://www.springframework.org/schema/util/spring-util-2.0.xsd">
         
-    <bean id="tokenHandler" class="ar.com.desitank.fe.backend.service.security.TokenHandler">
+    <bean id="tokenHandler" class="ar.com.inclufin.analytics.backend.service.security.TokenHandler">
         <property name="headerContentType" value="text/plain"/>
         <property name="simetricKey" value="eb77effd-26bb-46f8-bb0f-f3b4f4d63531"/>
         <property name="expirationInMinutes" value="1440"/>

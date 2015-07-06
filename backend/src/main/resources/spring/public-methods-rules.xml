@@ -13,7 +13,7 @@
 
 	<!-- Por ahora, hasta que no se implemente la seguridad en el frontEnd, se mantienen todos los servicios publicos -->
     <util:list id="publicMethodsRules">
-        <bean class="ar.com.desitank.fe.backend.service.aspect.PublicRule">
+        <bean class="ar.com.inclufin.analytics.backend.service.aspect.PublicRule">
             <property name="httpMethod" value="GET" />
             <property name="endpoints">
                 <util:list>
@@ -21,7 +21,7 @@
                 </util:list>
             </property>
         </bean>
-        <bean class="ar.com.desitank.fe.backend.service.aspect.PublicRule">
+        <bean class="ar.com.inclufin.analytics.backend.service.aspect.PublicRule">
             <property name="httpMethod" value="POST" />
             <property name="endpoints">
                 <util:list>
@@ -29,7 +29,7 @@
                 </util:list>
             </property>
         </bean>
-        <bean class="ar.com.desitank.fe.backend.service.aspect.PublicRule">
+        <bean class="ar.com.inclufin.analytics.backend.service.aspect.PublicRule">
             <property name="httpMethod" value="PUT" />
             <property name="endpoints">
                 <util:list>
@@ -37,7 +37,7 @@
                 </util:list>
             </property>
         </bean>
-        <bean class="ar.com.desitank.fe.backend.service.aspect.PublicRule">
+        <bean class="ar.com.inclufin.analytics.backend.service.aspect.PublicRule">
             <property name="httpMethod" value="DELETE" />
             <property name="endpoints">
                 <util:list>
@@ -45,7 +45,7 @@
                 </util:list>
             </property>
         </bean>
-        <bean class="ar.com.desitank.fe.backend.service.aspect.PublicRule">
+        <bean class="ar.com.inclufin.analytics.backend.service.aspect.PublicRule">
             <property name="httpMethod" value="OPTIONS" />
             <property name="endpoints">
                 <util:list>

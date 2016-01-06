@@ -12,7 +12,7 @@
         http://www.springframework.org/schema/util/spring-util.xsd">
 
     <util:list id="publicMethodsRules">
-        <bean class="ar.com.inclufin.analytics.backend.service.aspect.PublicRule">
+        <bean class="co.centauri.archetype.backend.service.aspect.PublicRule">
             <property name="httpMethod" value="OPTIONS" />
             <property name="endpoints">
                 <util:list>

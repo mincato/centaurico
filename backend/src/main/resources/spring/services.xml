@@ -27,7 +27,7 @@
     
     <import resource="public-methods-rules.xml" />
     
-    <bean id="authorizationFilter" class="ar.com.inclufin.analytics.backend.service.aspect.AuthorizationFilter">
+    <bean id="authorizationFilter" class="co.centauri.archetype.backend.service.aspect.AuthorizationFilter">
         <property name="publicMethodsRules" ref="publicMethodsRules" />
     </bean>
     
@@ -58,7 +58,7 @@
         </jaxrs:providers>
     </jaxrs:server>
 
-    <context:component-scan base-package="ar.com.inclufin.analytics.backend"
+    <context:component-scan base-package="co.centauri.archetype.backend"
         annotation-config="true" />
     <context:annotation-config />
     

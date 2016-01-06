@@ -1,17 +1,11 @@
 package ar.com.inclufin.analytics.backend.service.security;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-
-import ar.com.inclufin.analytics.backend.dto.UserData;
-import ar.com.inclufin.analytics.backend.service.exception.TokenGenerationException;
-import ar.com.inclufin.analytics.backend.service.exception.UnauthorizedException;
-import ar.com.inclufin.analytics.backend.util.JSONObjectConverter;
 
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
@@ -20,32 +14,35 @@ import com.nimbusds.jose.JWSVerifier;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
-import com.nimbusds.jwt.ReadOnlyJWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
+
+import ar.com.inclufin.analytics.backend.dto.UserData;
+import ar.com.inclufin.analytics.backend.service.exception.TokenGenerationException;
+import ar.com.inclufin.analytics.backend.service.exception.UnauthorizedException;
+import ar.com.inclufin.analytics.backend.util.JSONObjectConverter;
 
 @Service
 public class TokenHandler {
-    
+
     private String headerContentType;
     private String simetricKey;
     private int expirationInMinutes;
     private String issuer;
     private String audience;
     private String subject;
-    
-    private static final String SCOPE_KEY = "scope";
+
     private static final String USER_KEY = "key";
-    
+
     private static final long SECONDS_IN_A_MINUTE = 60;
     private static final long MILISECONDS_IN_A_SECOND = 1000;
-    
+
     public UserData verifyToken(String token) {
-        
+
         SignedJWT jwt = parseToken(token);
-        
+
         verifySignature(jwt);
-        
-        ReadOnlyJWTClaimsSet claims = getClaims(jwt);
+
+        JWTClaimsSet claims = getClaims(jwt);
 
         verifyIssuer(claims);
         verifyAudience(claims);
@@ -55,14 +52,14 @@ public class TokenHandler {
 
         return getUser(claims);
     }
-    
+
     public UserData getExpiredUser(String token) {
-        
+
         SignedJWT jwt = parseToken(token);
-        
+
         verifySignature(jwt);
-        
-        ReadOnlyJWTClaimsSet claims = getClaims(jwt);
+
+        JWTClaimsSet claims = getClaims(jwt);
 
         verifyIssuer(claims);
         verifyAudience(claims);
@@ -72,52 +69,41 @@ public class TokenHandler {
     }
 
     public String createToken(UserData userData) {
-        
-        JWTClaimsSet jwtClaims = createJWTClaims();
-        jwtClaims.setCustomClaim(SCOPE_KEY, "user");
-        jwtClaims.setCustomClaim(USER_KEY, JSONObjectConverter.convertToJSON(userData));
-        
+
+        JWTClaimsSet jwtClaims = createJWTClaims(userData);
+
         // Create JWS header with HS256 algorithm
-        JWSHeader header = new JWSHeader(JWSAlgorithm.HS256);
-        header.setContentType(headerContentType);
+        JWSHeader header = new JWSHeader.Builder(JWSAlgorithm.HS256).contentType(headerContentType)
+                .customParam("exp", new Date().getTime()).build();
 
         SignedJWT jwt = new SignedJWT(header, jwtClaims);
 
         // sign the JSON Web Token
-        JWSSigner signer = new MACSigner(simetricKey.getBytes());
-        
         try {
+            JWSSigner signer = new MACSigner(simetricKey.getBytes());
             jwt.sign(signer);
         } catch (Exception e) {
             throw new TokenGenerationException(e);
         }
-        
+
         return jwt.serialize();
     }
-    
+
     private Date calculateExpirationTime() {
         return new Date(new Date().getTime() + MILISECONDS_IN_A_SECOND * SECONDS_IN_A_MINUTE * expirationInMinutes);
     }
-    
-    private JWTClaimsSet createJWTClaims() {
-        JWTClaimsSet jwtClaims = new JWTClaimsSet();
-        jwtClaims.setIssuer(issuer);
-        jwtClaims.setSubject(subject);
-        
-        List<String> aud = new ArrayList<String>();
-        aud.add(audience);
-        jwtClaims.setAudience(aud);
-        
-        jwtClaims.setExpirationTime(calculateExpirationTime());
-        jwtClaims.setNotBeforeTime(new Date());
-        jwtClaims.setIssueTime(new Date());
-        jwtClaims.setJWTID(UUID.randomUUID().toString());
-        
-        return jwtClaims;
+
+    private JWTClaimsSet createJWTClaims(UserData userData) {
+
+        JWTClaimsSet claimsSet = new JWTClaimsSet.Builder().subject(subject).expirationTime(calculateExpirationTime())
+                .claim(USER_KEY, JSONObjectConverter.convertToJSON(userData)).issuer(issuer).audience(audience)
+                .jwtID(UUID.randomUUID().toString()).build();
+
+        return claimsSet;
     }
-    
+
     private SignedJWT parseToken(String token) {
-        SignedJWT jwt = null;        
+        SignedJWT jwt = null;
         try {
             jwt = SignedJWT.parse(token);
         } catch (Exception e) {
@@ -126,10 +112,10 @@ public class TokenHandler {
         return jwt;
     }
 
-    private void verifySignature(SignedJWT jwt) {
-        JWSVerifier verifier = new MACVerifier(simetricKey);
+    private void verifySignature(SignedJWT jwt) {        
         boolean verifiedSignature = false;
         try {
+            JWSVerifier verifier = new MACVerifier(simetricKey);
             verifiedSignature = jwt.verify(verifier);
         } catch (Exception e) {
             throw new UnauthorizedException(e);
@@ -138,9 +124,9 @@ public class TokenHandler {
             throw new UnauthorizedException("verifySignature FAILED!");
         }
     }
-    
-    private ReadOnlyJWTClaimsSet getClaims(SignedJWT jwt) {
-        ReadOnlyJWTClaimsSet claims = null;
+
+    private JWTClaimsSet getClaims(SignedJWT jwt) {
+        JWTClaimsSet claims = null;
         try {
             claims = jwt.getJWTClaimsSet();
         } catch (Exception e) {
@@ -148,22 +134,22 @@ public class TokenHandler {
         }
         return claims;
     }
-    
-    private void verifyExpiration(ReadOnlyJWTClaimsSet claims) {
+
+    private void verifyExpiration(JWTClaimsSet claims) {
         Date expiration = claims.getExpirationTime();
         Date now = new Date();
         if (now.getTime() >= expiration.getTime()) {
             throw new UnauthorizedException("verifyExpiration FAILED!");
         }
     }
-    
-    private void verifyIssuer(ReadOnlyJWTClaimsSet claims) {
+
+    private void verifyIssuer(JWTClaimsSet claims) {
         if (!issuer.equals(claims.getIssuer())) {
             throw new UnauthorizedException("verifyIssuer FAILED!");
         }
     }
-    
-    private void verifyAudience(ReadOnlyJWTClaimsSet claims) {
+
+    private void verifyAudience(JWTClaimsSet claims) {
         List<String> au = claims.getAudience();
         if (au == null || au.size() != 1) {
             throw new UnauthorizedException("verifyAudience FAILED!");
@@ -172,15 +158,15 @@ public class TokenHandler {
             throw new UnauthorizedException("verifyAudience FAILED!");
         }
     }
-    
-    private void verifySubject(ReadOnlyJWTClaimsSet claims) {
+
+    private void verifySubject(JWTClaimsSet claims) {
         if (!subject.equals(claims.getSubject())) {
             throw new UnauthorizedException("verifySubject FAILED!");
         }
     }
-    
-    private UserData getUser(ReadOnlyJWTClaimsSet claims) {
-        String userJSON = (String) claims.getCustomClaim(USER_KEY);
+
+    private UserData getUser(JWTClaimsSet claims) {
+        String userJSON = (String) claims.getClaim(USER_KEY);
         if (StringUtils.isBlank(userJSON)) {
             throw new UnauthorizedException("USER not found in custom claim's token");
         }
@@ -238,5 +224,5 @@ public class TokenHandler {
     public void setSubject(String subject) {
         this.subject = subject;
     }
-    
+
 }

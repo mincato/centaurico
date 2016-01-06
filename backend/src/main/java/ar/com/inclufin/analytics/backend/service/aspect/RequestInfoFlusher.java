@@ -1,11 +1,11 @@
 package ar.com.inclufin.analytics.backend.service.aspect;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerResponseContext;
+import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 
-import org.apache.cxf.jaxrs.model.OperationResourceInfo;
-import org.apache.cxf.message.Message;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import ar.com.inclufin.analytics.backend.util.RequestHandler;
 
 @Service
-public class RequestInfoFlusher implements org.apache.cxf.jaxrs.ext.ResponseHandler {
+public class RequestInfoFlusher implements ContainerResponseFilter {
     
     private static final Logger CONSOLE_LOGGER = Logger.getLogger("requestInfoConsoleLogger");
     private static final Logger FILE_LOGGER = Logger.getLogger("requestInfoFileLogger");
@@ -25,8 +25,7 @@ public class RequestInfoFlusher implements org.apache.cxf.jaxrs.ext.ResponseHand
     private RequestHandler requestHandler;
 
     @Override
-    public Response handleResponse(Message message,
-            OperationResourceInfo invokedOperation, Response response) {
+    public void filter(ContainerRequestContext inContext, ContainerResponseContext outContext) {
         
         String requestInfoJSON = null;
 
@@ -42,10 +41,6 @@ public class RequestInfoFlusher implements org.apache.cxf.jaxrs.ext.ResponseHand
             
         CONSOLE_LOGGER.debug("requestInfo = " + requestInfoJSON);
         FILE_LOGGER.info(requestInfoJSON);
-            
-
-        
-        return null;
     }
 
 }

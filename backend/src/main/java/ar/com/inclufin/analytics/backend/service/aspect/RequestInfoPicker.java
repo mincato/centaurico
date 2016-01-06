@@ -6,18 +6,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 
-import org.apache.cxf.jaxrs.model.ClassResourceInfo;
-import org.apache.cxf.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.inclufin.analytics.backend.util.RequestHandler;
 
 @Service
-public class RequestInfoPicker implements org.apache.cxf.jaxrs.ext.RequestHandler {
+public class RequestInfoPicker implements ContainerRequestFilter {
 
     @Context
     private HttpServletRequest request;
@@ -26,7 +25,7 @@ public class RequestInfoPicker implements org.apache.cxf.jaxrs.ext.RequestHandle
     private RequestHandler requestHandler;
     
     @Override
-    public Response handleRequest(Message inputMessage, ClassResourceInfo resourceClass) {
+    public void filter(ContainerRequestContext context) {
 
         RequestInfo requestInfo = requestHandler.getRequestInfoOrCreateNew(request);
         requestInfo.setStart(new Date());
@@ -36,8 +35,6 @@ public class RequestInfoPicker implements org.apache.cxf.jaxrs.ext.RequestHandle
         requestInfo.setHeader(buildHeader(request));
         
         requestHandler.saveRequestInfo(request, requestInfo);
-        
-        return null;
     }
     
     private Map<String, String> buildHeader(HttpServletRequest request) {

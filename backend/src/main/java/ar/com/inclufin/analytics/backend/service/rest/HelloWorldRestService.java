@@ -13,23 +13,29 @@ import javax.ws.rs.core.Response.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ar.com.inclufin.analytics.backend.model.HelloWorld;
+import ar.com.inclufin.analytics.backend.service.HelloWorldService;
 import ar.com.inclufin.analytics.backend.util.RestResponseHandler;
 
 @Service
 @Path("/hello")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class HelloRestService {
+public class HelloWorldRestService {
 
     @Autowired
     private RestResponseHandler responseHandler;
-    
+
+    @Autowired
+    private HelloWorldService helloWorldService;
+
     @GET
-    public Response hello(@Context HttpServletRequest request) {
+    public Response sayHello(@Context HttpServletRequest request) {
         try {
-            return responseHandler.buildSuccessResponse("{ \"text\": \"Hello. I'm OK!\" }", Status.OK);
+            HelloWorld helloWorld = helloWorldService.sayHello();
+            return responseHandler.buildSuccessResponse(helloWorld, Status.OK);
         } catch (Exception e) {
             return responseHandler.buildErrorResponse(e);
-        }            
-    }    
+        }
+    }
 }

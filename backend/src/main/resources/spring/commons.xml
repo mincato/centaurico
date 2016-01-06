@@ -11,15 +11,15 @@
         http://cxf.apache.org/schemas/jaxrs.xsd">
         
     <!-- JacksonMapper JSON Parser Specific Configuration -->
-    <bean id="jacksonMapper" class="org.codehaus.jackson.map.ObjectMapper">
-        <property name="serializationConfig.dateFormat">
+    <bean id="jacksonMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
+        <property name="dateFormat">
             <bean class="java.text.SimpleDateFormat">
                 <constructor-arg value="dd/MM/yyyy" />
             </bean>
         </property>
     </bean>
     
-    <bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"
+    <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"
         p:mapper-ref="jacksonMapper" />
     
 </beans>

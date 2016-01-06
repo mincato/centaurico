@@ -2,49 +2,40 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ar.com.inclufin.analytics</groupId>
-    <artifactId>inclufin-analytics</artifactId>
+    <groupId>co.centauri.archetype</groupId>
+    <artifactId>centaurico-archetype</artifactId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <name>Inclufin Analytics</name>
+    <version>0.1</version>
+    <name>Centaurico Archetype</name>
 
     <properties>
     	<frontend.basedir>../frontend</frontend.basedir>
     
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
-        <maven.compiler.target>1.7</maven.compiler.target>
-        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
         <maven.war.plugin.version>2.1</maven.war.plugin.version>
-        <yeoman.maven.plugin.version>0.2</yeoman.maven.plugin.version>
+        <yeoman.maven.plugin.version>0.5</yeoman.maven.plugin.version>
 
-        <junit.version>4.11</junit.version>
+        <junit.version>4.12</junit.version>
         <mockito.version>1.10.19</mockito.version>
-        <log4j.version>1.2.17</log4j.version>
-        
-        <h2database.version>1.3.175</h2database.version>
-        <dbunit.version>2.4.9</dbunit.version>
-        <spring-test-dbunit.version>1.0.1</spring-test-dbunit.version>
-        
-        <servlet.version>3.1.0</servlet.version>
-        <cxf.version>2.7.13</cxf.version>
-        <spring.version>4.1.6.RELEASE</spring.version>
-        <jackson.version>1.9.13</jackson.version>
-        
-        <commons-lang.version>2.6</commons-lang.version>
-        <commons-collection.version>3.2.1</commons-collection.version>
-        <commons-beanutils.version>1.9.2</commons-beanutils.version>
-        <commonsio.version>2.4</commonsio.version>
-        
-        <postgresql-jdbc.version>9.1-901.jdbc4</postgresql-jdbc.version>
-        <c3p0.version>0.9.5</c3p0.version>
-        <mybatis.version>3.2.8</mybatis.version>
-        <mybatis-spring.version>1.2.2</mybatis-spring.version>
+        <log4j.version>2.5</log4j.version>
 
-        <slf4j.version>1.7.5</slf4j.version>
-        <nimbus-jose-jwt.version>2.26.1</nimbus-jose-jwt.version>
-        <mail.version>1.4.7</mail.version>
-        <aspectj.version>1.8.3</aspectj.version>
+        <servlet.version>3.1.0</servlet.version>
+        <cxf.version>3.1.4</cxf.version>
+        <spring.version>4.2.4.RELEASE</spring.version>
+        <jackson.version>2.6.4</jackson.version>
+        
+        <commons-lang.version>3.4</commons-lang.version>
+        <commons-collection.version>4.1</commons-collection.version>
+        <commons-beanutils.version>1.9.2</commons-beanutils.version>
+        <commons-io.version>2.4</commons-io.version>
+        
+        <slf4j.version>1.7.13</slf4j.version>
+        <nimbus-jose-jwt.version>4.11</nimbus-jose-jwt.version>
+        <mail.version>1.5.5</mail.version>
+        <aspectj.version>1.8.7</aspectj.version>
         <jsr250-api.version>1.0</jsr250-api.version>
         
     </properties>
@@ -62,14 +53,14 @@
 	</dependencyManagement>    
 
     <dependencies>
-        <!-- JUnit -->
+    
+        <!-- Test -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
@@ -77,11 +68,21 @@
             <scope>test</scope>        
         </dependency>       
 
-        <!-- Apache Log4j -->
+        <!-- Logging -->
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
 
         <!-- Servlet 3.1 Specification for Tomcat 8 -->
@@ -90,8 +91,7 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${servlet.version}</version>
 			<scope>provided</scope>
-		</dependency>
-        
+		</dependency>        
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-servlet_3.0_spec</artifactId>
@@ -123,13 +123,13 @@
             </exclusions>
         </dependency>
 
-        <!-- JSON Provider -->
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-jaxrs</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-
+		<!-- JSON Provider -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		
         <!-- Spring Framework -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -158,13 +158,13 @@
 
         <!-- Apache Commons -->
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
             <version>${commons-lang.version}</version>
         </dependency>
         <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
             <version>${commons-collection.version}</version>
         </dependency>
         <dependency>
@@ -175,67 +175,9 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>${commonsio.version}</version>
+			<version>${commons-io.version}</version>
 		</dependency>
 
-        <!-- Driver PostgreSQL -->
-        <dependency>
-            <groupId>postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql-jdbc.version}</version>
-        </dependency>
-        
-        <!-- C3P0 Connection Pool -->
-        <dependency>
-			<groupId>com.mchange</groupId>
-			<artifactId>c3p0</artifactId>
-            <version>${c3p0.version}</version>
-        </dependency>
-        
-        <!-- MyBatis -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>${mybatis-spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>${mybatis.version}</version>
-        </dependency>
-        
-        <!-- Spring Test DBUnit to run DAO's test -->
-        <dependency>
-            <groupId>com.github.springtestdbunit</groupId>
-            <artifactId>spring-test-dbunit</artifactId>
-            <version>${spring-test-dbunit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.dbunit</groupId>
-            <artifactId>dbunit</artifactId>
-            <version>${dbunit.version}</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>        
-        
-        <!-- sl4j to log -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        
         <!-- For JWT authentication -->
         <dependency>
             <groupId>com.nimbusds</groupId>
@@ -245,8 +187,8 @@
         
 		<!-- JavaMail -->
         <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
             <version>${mail.version}</version>
         </dependency>
         
@@ -256,19 +198,11 @@
 			<artifactId>jsr250-api</artifactId>
 			<version>${jsr250-api.version}</version>
 		</dependency>
-		
-        <!-- Driver H2 for JUnit at DAO level -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2database.version}</version>
-            <scope>test</scope>
-        </dependency>		
 
     </dependencies>
 
     <build>
-        <finalName>inclufin-analytics</finalName>
+        <finalName>centaurico-archetype</finalName>
 
         <plugins>
             <plugin>

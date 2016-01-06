@@ -3,21 +3,15 @@ package ar.com.inclufin.analytics.backend.util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.inclufin.analytics.backend.model.User;
-import ar.com.inclufin.analytics.backend.repository.UserRepository;
-import ar.com.inclufin.analytics.backend.service.security.TokenHandler;
 
 @Service
 public class SessionHandler {
 	
-    @Autowired
-    private TokenHandler tokenHandler;
-    
-    @Autowired
-    private UserRepository userRepository;
+/*    @Autowired
+    private UserRepository userRepository;*/
 
     public void saveUserInSession(HttpServletRequest request, String token, User user) {
     	HttpSession session = request.getSession(true);
@@ -31,7 +25,7 @@ public class SessionHandler {
     		user = (User) session.getAttribute(token);
     	}
     	if (user == null) {
-    		user = userRepository.findOne(userId);
+    		//user = userRepository.findOne(userId);
     		saveUserInSession(request, token, user);
     	}
     	return user;

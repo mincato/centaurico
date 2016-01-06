@@ -3,18 +3,18 @@ package ar.com.inclufin.analytics.backend.service.aspect;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerResponseContext;
+import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 
-import org.apache.cxf.jaxrs.model.OperationResourceInfo;
-import org.apache.cxf.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.inclufin.analytics.backend.util.RequestHandler;
 
 @Service
-public class ResponseInfoPicker implements org.apache.cxf.jaxrs.ext.ResponseHandler {
+public class ResponseInfoPicker implements ContainerResponseFilter {
     
     @Context
     private HttpServletRequest request;
@@ -23,18 +23,16 @@ public class ResponseInfoPicker implements org.apache.cxf.jaxrs.ext.ResponseHand
     private RequestHandler requestHandler;
 
     @Override
-    public Response handleResponse(Message outputMessage,
-            OperationResourceInfo invokedOperation, Response response) {
+    public void filter(ContainerRequestContext inContext, ContainerResponseContext outContext) {
         
         RequestInfo requestInfo = requestHandler.getRequestInfoOrCreateNew(request);
-        requestInfo.setResponseStatus(response.getStatus());
-        requestInfo.setResponseEntity(response.getEntity());
+        requestInfo.setResponseStatus(outContext.getStatus());
+        requestInfo.setResponseEntity(outContext.getEntity());
         
         requestInfo.setEnd(new Date());
         requestInfo.setDuration(calculateDuration(requestInfo));
         
         requestHandler.saveRequestInfo(request, requestInfo);
-        return null;
     }
     
     private Long calculateDuration(final RequestInfo requestInfo) {

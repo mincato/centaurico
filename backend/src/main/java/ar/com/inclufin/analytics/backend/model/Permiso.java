@@ -5,7 +5,7 @@
  */
 package ar.com.inclufin.analytics.backend.model;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Permiso extends BackEndEntity {

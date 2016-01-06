@@ -21,7 +21,8 @@
     <import resource="profiles.xml" />    
     <import resource="commons.xml" />        
     <import resource="security-jwt.xml" />
-    <import resource="database.xml"/>
+    <import resource="security-authenticator.xml" />
+    <!-- <import resource="database.xml"/> -->
     <import resource="errors.xml" />
     
     <import resource="public-methods-rules.xml" />
@@ -32,9 +33,8 @@
     
     <jaxrs:server id="businessServiceJaxRs" address="/">
         <jaxrs:serviceBeans>
-            <ref bean="helloRestService" />
+            <ref bean="helloWorldRestService" />
             <ref bean="uploadDocRestService" />
-            <ref bean="tipoMaterialRestService" />
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean="jsonProvider" />

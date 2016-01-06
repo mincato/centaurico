@@ -7,7 +7,7 @@
 
 Descripción:
 ============
-Este proyecto es un arquetipo para Inclufin. En este proyecto se crea una capa de persistencia con Spring Data + MyBatis.
+Este proyecto es un arquetipo para Centaurico. En este proyecto se crea una capa de persistencia con Spring Data + MyBatis.
 
 El Front-End está preparado para correr en un Node.js, con el fin de que en un ambiente de desarrollo se pueda trabajar de forma cómoda.
 
@@ -27,9 +27,9 @@ Para desplegar la aplicación web en Tomcat:
 
 Parado sobre la carpeta backend del proyecto, ejecutar:
 
-> mvn clean package -Pgrunt-build && cp target/inclufin-analytics.war $CATALINA_HOME/webapps
+> mvn clean package -Pgrunt-build && cp target/centaurico-archetype.war $CATALINA_HOME/webapps
 
-Si todo sale bien, la aplicación estará disponible en localhost:8080/inclufin-analytics.
+Si todo sale bien, la aplicación estará disponible en localhost:8080/centaurico-archetype.
 
 Para compilar solamente el backend:
 ===================================
@@ -38,9 +38,9 @@ Cuando se está desarrollando en el Back-End Java y no hubo cambios en ningún a
 
 Parado sobre la carpeta backend del proyecto, ejecutar:
 
-> mvn clean package && cp target/inclufin-analytics.war $CATALINA_HOME/webapps
+> mvn clean package && cp target/centaurico-archetype.war $CATALINA_HOME/webapps
 
-Si todo sale bien, la aplicación estará disponible en localhost:8080/inclufin-analytics.war.
+Si todo sale bien, la aplicación estará disponible en localhost:8080/centaurico-archetype.war.
 
 Para levantar sólo el frontend y trabajar en caliente:
 =======================================================

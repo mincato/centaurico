@@ -20,7 +20,7 @@
     </appender>
     
     <!-- Poner en TRACE para ver los queries y resultados de la Base-->
-	<logger name="com.okteam.okprototype.backend.dao">
+	<logger name="co.centaurico.dao">
 		<level value="INFO" />
 		<appender-ref ref="consoleAppender" />
 	</logger>

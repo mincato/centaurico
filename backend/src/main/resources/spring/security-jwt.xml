@@ -9,13 +9,13 @@
         http://cxf.apache.org/jaxrs                     http://cxf.apache.org/schemas/jaxrs.xsd
         http://www.springframework.org/schema/util      http://www.springframework.org/schema/util/spring-util-2.0.xsd">
         
-    <bean id="tokenHandler" class="co.centauri.archetype.backend.service.security.TokenHandler">
+    <bean id="tokenHandler" class="co.centauri.security.TokenHandler">
         <property name="headerContentType" value="text/plain"/>
-        <property name="simetricKey" value="eb77effd-26bb-46f8-bb0f-f3b4f4d63531"/>
+        <property name="simetricKey" value="632f381e-5fcd-4755-a828-6e535224168c"/>
         <property name="expirationInMinutes" value="1440"/>
         <property name="issuer" value="argentarii Server"/>
-        <property name="audience" value="http://volkno.net/archetypes/epidata/argentarii/services"/>
-        <property name="subject" value="argentarii Client"/>
+        <property name="audience" value="http://centauri.co/"/>
+        <property name="subject" value="Centaurico Client"/>
     </bean>
 
 </beans>

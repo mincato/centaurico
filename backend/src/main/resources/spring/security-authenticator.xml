@@ -9,7 +9,7 @@
         http://cxf.apache.org/jaxrs                     http://cxf.apache.org/schemas/jaxrs.xsd
         http://www.springframework.org/schema/util      http://www.springframework.org/schema/util/spring-util-2.0.xsd">
         
-	<bean id="userService" class="co.centauri.archetype.backend.service.UserService">
+	<bean id="userService" class="co.centauri.security.UserService">
 		<property name="authenticatorService" ref="authenticatorMockService" />
 	</bean>
 

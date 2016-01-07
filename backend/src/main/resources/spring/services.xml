@@ -27,14 +27,14 @@
     
     <import resource="public-methods-rules.xml" />
     
-    <bean id="authorizationFilter" class="co.centauri.archetype.backend.service.aspect.AuthorizationFilter">
+    <bean id="authorizationFilter" class="co.centauri.security.AuthorizationFilter">
         <property name="publicMethodsRules" ref="publicMethodsRules" />
     </bean>
     
     <jaxrs:server id="businessServiceJaxRs" address="/">
         <jaxrs:serviceBeans>
             <ref bean="helloWorldRestService" />
-            <ref bean="uploadDocRestService" />
+            <ref bean="fileUploadRestService" />
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean="jsonProvider" />
@@ -58,7 +58,7 @@
         </jaxrs:providers>
     </jaxrs:server>
 
-    <context:component-scan base-package="co.centauri.archetype.backend"
+    <context:component-scan base-package="co.centauri"
         annotation-config="true" />
     <context:annotation-config />
     

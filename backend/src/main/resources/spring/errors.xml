@@ -8,47 +8,47 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="internalServerErrorFactory" class="co.centauri.archetype.backend.service.exception.InternalServerErrorFactory">
+    <bean id="internalServerErrorFactory" class="co.centauri.exception.InternalServerErrorFactory">
         <property name="exceptionMapping">
             <map>
                 <entry key="Unknown">
-                	<bean class="co.centauri.archetype.backend.service.exception.InternalServerError">
+                	<bean class="co.centauri.exception.InternalServerError">
                 		<property name="code" value="1" />
                 		<property name="message" value="Hubo un error inesperado" />
                 	</bean>
                 </entry>
                 <entry key="org.springframework.dao.DataIntegrityViolationException">
-                	<bean class="co.centauri.archetype.backend.service.exception.InternalServerError">
+                	<bean class="co.centauri.exception.InternalServerError">
                 		<property name="code" value="2" />
                 		<property name="message" value="Hubo una violación de integridad de datos" />
                 	</bean>
                 </entry>
-                <entry key="co.centauri.archetype.backend.service.exception.ChangePasswordException">
-                	<bean class="co.centauri.archetype.backend.service.exception.InternalServerError">
+                <entry key="co.centauri.security.ChangePasswordException">
+                	<bean class="co.centauri.exception.InternalServerError">
                 		<property name="code" value="3" />
                 		<property name="message" value="Hubo un error al cambiar el password" />
                 	</bean>
                 </entry>
-                <entry key="co.centauri.archetype.backend.service.exception.AuthenticationException">
-                	<bean class="co.centauri.archetype.backend.service.exception.InternalServerError">
+                <entry key="co.centauri.exception.AuthenticationException">
+                	<bean class="co.centauri.exception.InternalServerError">
                 		<property name="code" value="4" />
                 		<property name="message" value="Usuario o password inválido" />
                 	</bean>
                 </entry>
-                <entry key="co.centauri.archetype.backend.service.exception.RefreshTokenException">
-                	<bean class="co.centauri.archetype.backend.service.exception.InternalServerError">
+                <entry key="co.centauri.security.RefreshTokenException">
+                	<bean class="co.centauri.exception.InternalServerError">
                 		<property name="code" value="5" />
                 		<property name="message" value="Hubo un error al querer refrescar el token" />
                 	</bean>
                 </entry>
-                <entry key="co.centauri.archetype.backend.service.exception.ForbiddenException">
-                	<bean class="co.centauri.archetype.backend.service.exception.InternalServerError">
+                <entry key="co.centauri.security.ForbiddenException">
+                	<bean class="co.centauri.exception.InternalServerError">
                 		<property name="code" value="6" />
                 		<property name="message" value="El usuario ingresado no está autorizado para acceder al sistema de argentarii" />
                 	</bean>
 				</entry>
                 <entry key="org.springframework.transaction.TransactionSystemException">
-                	<bean class="co.centauri.archetype.backend.service.exception.InternalServerError">
+                	<bean class="co.centauri.exception.InternalServerError">
                 		<property name="code" value="7" />
                 		<property name="message" value="Hubo una error al hacer commit de los datos. Probablemente se deba a una violación de integridad. Consulte el log para más detalle." />
                 	</bean>
@@ -57,6 +57,6 @@
         </property>
     </bean>
 
-    <bean id="restResponseHandler" class="co.centauri.archetype.backend.util.RestResponseHandler" />
+    <bean id="restResponseHandler" class="co.centauri.RestResponseHandler" />
 
 </beans>

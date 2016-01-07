@@ -44,7 +44,7 @@
                 <entry key="co.centauri.security.ForbiddenException">
                 	<bean class="co.centauri.exception.InternalServerError">
                 		<property name="code" value="6" />
-                		<property name="message" value="El usuario ingresado no está autorizado para acceder al sistema de argentarii" />
+                		<property name="message" value="El usuario ingresado no está autorizado para acceder al sistema" />
                 	</bean>
 				</entry>
                 <entry key="org.springframework.transaction.TransactionSystemException">

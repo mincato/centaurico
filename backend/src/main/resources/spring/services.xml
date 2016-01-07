@@ -46,9 +46,9 @@
         </jaxrs:providers>
     </jaxrs:server>
     
-    <jaxrs:server id="loginServiceJaxRs" address="/auth">
+    <jaxrs:server id="authServiceJaxRs" address="/auth">
         <jaxrs:serviceBeans>
-            <ref bean="loginRestService" />
+            <ref bean="authenticationRestService" />
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean="jsonProvider" />

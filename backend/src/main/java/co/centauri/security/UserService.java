@@ -3,6 +3,7 @@ package co.centauri.security;
 import java.text.MessageFormat;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,10 +14,13 @@ public class UserService {
 	
     private AuthenticatorService authenticatorService;
     
+    @Autowired
+    private UserRepository userRepository;
+    
 	@Transactional
 	public User addUser(User newUser) {
 	    
-		//newUser = userRepository.create(newUser);
+		newUser = userRepository.create(newUser);
         
         LOGGER.info("User added: " + newUser.getFirstName() + " " + newUser.getLastName());
         return newUser;
@@ -24,14 +28,12 @@ public class UserService {
 	
 	@Transactional
     public User updateUser(User user) {
-		//user = userRepository.create(user);
+		user = userRepository.create(user);
         return user;
     }
 
     public User findByUsername(String username) {
-        //User user = userRepository.findByUsername(username);
-    	User user = new User();
-    	user.setUsername(username);
+        User user = userRepository.findByUsername(username);
         return user;
     }
     

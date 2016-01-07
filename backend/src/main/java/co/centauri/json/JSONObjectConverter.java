@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class JSONObjectConverter {
     
@@ -38,7 +39,8 @@ public class JSONObjectConverter {
     
     private static ObjectMapper createMapper() {
         DateFormat df = new SimpleDateFormat(DATE_FORMAT);
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();        
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         mapper.setDateFormat(df);
         return mapper;
     }

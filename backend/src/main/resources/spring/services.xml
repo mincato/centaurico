@@ -55,6 +55,7 @@
             <ref bean="requestInfoPicker" />
             <ref bean="responseInfoPicker" />
             <ref bean="requestInfoFlusher" />
+            <ref bean="accessControlAllowOriginFilter" />
         </jaxrs:providers>
     </jaxrs:server>
 

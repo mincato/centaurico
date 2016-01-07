@@ -1,0 +1,52 @@
+<section class="row" data-ng-controller="LoginController">
+    
+    <div class="col-md-4 col-md-offset-4" style="margin-top: 5%">
+        <div class="panel member_signin">
+            <div class="panel-body border-color">
+                <div class="fa_user">
+                    <i class="fa fa-user"></i>
+                </div>
+                <p class="member">Backoffice</p>
+    
+                <form role="form" name="loginForm" class="loginForm" data-ng-submit="login()" novalidate>
+
+                    <!-- USERNAME -->
+                    <div class="form-group">
+                        <label for="username" >Nombre de usuario</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control username" name="username" ng-model="credentials.username" required />
+                            <!-- UI Validation  -->
+                            <div ng-show="loginForm.username.$invalid && loginForm.username.$dirty">
+                                <small class="text-danger" ng-show="loginForm.username.$error.required" >
+                                    Nombre de usuario es requerido.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="form-group">
+                        <label for="password" >Contraseña</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control password"
+                                   name="password" ng-model="credentials.password" required />                    
+                            <!-- UI Validation  -->
+                            <div ng-show="loginForm.password.$invalid && loginForm.password.$dirty">
+                                <small class="text-danger" ng-show="loginForm.password.$error.required" >
+                                    Contraseña es requerida.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit"
+                                class="btn btn-primary btn-md login"
+                                data-ng-disabled="loginForm.$invalid" >Iniciar Sesión</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>    
+    
+</section>

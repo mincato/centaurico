@@ -11,13 +11,14 @@
     </appender>
     
     <!-- FILE: Appender for RequestInfo log -->
-    <appender name="requestInfoAppender" class="org.apache.log4j.FileAppender">
+    <appender name="requestInfoAppender" class="org.apache.log4j.DailyRollingFileAppender">
         <param name="file" value="${catalina.home}/logs/requestInfo.log" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd" />
         <param name="append" value="true" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="[%d{dd/MM/yyyy HH:mm:ss}] %m%n%n" />
         </layout>
-    </appender>
+    </appender>    
     
     <!-- Poner en TRACE para ver los queries y resultados de la Base-->
 	<logger name="co.centaurico.dao">

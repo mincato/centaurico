@@ -7,15 +7,15 @@ public abstract class BackEndEntity extends BackEndObject {
     private static final long serialVersionUID = -5354058460706112830L;
 
     @JsonProperty("_id")
-    private Long id;
+    private Integer id;
 
     private EntityState state = EntityState.ACTIVE;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

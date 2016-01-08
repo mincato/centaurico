@@ -4,13 +4,6 @@ angular.module('security').run(function($rootScope, $location, AuthenticationSer
     
 	$rootScope.$on('$stateChangeStart', function (event, next) {
         
-        // En Chrome esto no funciona!! En Firefox si
-        $window.onbeforeunload = function() {
-            if (AuthenticationService.isLogged()) {
-                AuthenticationService.logout();
-            }
-        };
-        
 		if (!AuthenticationService.isLogged()) {
 			$location.path('login');
 		}

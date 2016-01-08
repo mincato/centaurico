@@ -35,6 +35,7 @@
         <jaxrs:serviceBeans>
             <ref bean="helloWorldRestService" />
             <ref bean="fileUploadRestService" />
+            <ref bean="developerRestService" />
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean="jsonProvider" />

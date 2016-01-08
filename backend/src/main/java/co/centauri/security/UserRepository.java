@@ -1,32 +1,32 @@
 package co.centauri.security;
 
-import java.util.Date;
 import java.util.Map;
-import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
 import co.centauri.map.MapBuilder;
+import co.centauri.random.RandomInteger;
 
 @Service
 public class UserRepository {
     
-    private Map<String, User> usersByUsername;
-    private Map<Long, User> usersById;
+    private static Map<String, User> usersByUsername;
+    private static Map<Integer, User> usersById;
     
-    public UserRepository() {
+    static {
         User user = new User();
         user.setUsername("admin");
         user.setFirstName("John");
         user.setLastName("Smith");
-        user.setId(getRandomId());
+        user.setId(RandomInteger.getNext());
         user.setEmail("john.smith@centauri.co");
-        create(user);
+        usersByUsername = MapBuilder.concurrent(user.getUsername(), user);
+        usersById = MapBuilder.concurrent(user.getId(), user);
     }
-
-    public User create(User newUser) {        
-        usersByUsername = MapBuilder.concurrent(newUser.getUsername(), newUser);
-        usersById = MapBuilder.concurrent(newUser.getId(), newUser);
+    
+    public User save(User newUser) {
+        usersByUsername.put(newUser.getUsername(), newUser);
+        usersById.put(newUser.getId(), newUser);
         return newUser;
     }
 
@@ -36,10 +36,6 @@ public class UserRepository {
 
     public User findOne(Long userId) {
         return usersById.get(userId);
-    }
-    
-    private static Long getRandomId() {
-        return new Random(new Date().getTime()).nextLong();
     }
     
 }

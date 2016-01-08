@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('security').controller('LoginController', ['$scope', 'AuthenticationService', '$location', 'Configuration',
-    function ($scope, AuthenticationService, $location, Configuration) {
+angular.module('security').controller('LoginController', ['$scope', 'AuthenticationService', '$location', 'Configuration', 'Messages',
+    function ($scope, AuthenticationService, $location, Configuration, Messages) {
         
         $scope.init = function() {            
             $scope.credentials = {
@@ -19,12 +19,7 @@ angular.module('security').controller('LoginController', ['$scope', 'Authenticat
         };
         
         var loginError = function(response) {
-            var error = null;
-            if (response) {
-                error = response.message;
-            } else {
-                error = 'Error Inesperado.';
-            }
+            var error = Messages.getErrorMessage(response);            
             $scope.$emit('showError', error);
         };        
         

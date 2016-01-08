@@ -10,7 +10,6 @@ angular.module('core').controller('ApplicationController', ['$scope',
         });
         
         $scope.$on('showError', function(event, error) {
-            console.log('HOLAAAAAAAAAAAAAA');
             $scope.messages.danger = error;
         });
 

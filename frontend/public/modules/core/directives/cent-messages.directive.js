@@ -29,7 +29,7 @@ angular.module('core').directive('centMessage', function($timeout) {
     return {
         restrict: 'EA',
         link: link,
-        templateUrl: 'modules/core/directives/cent-messages.html',
+        templateUrl: 'modules/core/views/cent-messages.directive.html',
         scope: {
             ngModel: '='
         }

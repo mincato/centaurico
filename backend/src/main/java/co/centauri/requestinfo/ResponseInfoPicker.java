@@ -15,26 +15,26 @@ import co.centauri.security.SecurityHandler;
 
 @Service
 public class ResponseInfoPicker implements ContainerResponseFilter {
-    
+
     @Context
     private HttpServletRequest request;
-    
+
     @Autowired
     private SecurityHandler requestHandler;
 
     @Override
     public void filter(ContainerRequestContext inContext, ContainerResponseContext outContext) {
-        
+
         RequestInfo requestInfo = requestHandler.getRequestInfoOrCreateNew(request);
         requestInfo.setResponseStatus(outContext.getStatus());
         requestInfo.setResponseEntity(outContext.getEntity());
-        
+
         requestInfo.setEnd(new Date());
         requestInfo.setDuration(calculateDuration(requestInfo));
-        
+
         requestHandler.saveRequestInfo(request, requestInfo);
     }
-    
+
     private Long calculateDuration(final RequestInfo requestInfo) {
         Date start = requestInfo.getStart();
         Date end = requestInfo.getEnd();

@@ -19,61 +19,61 @@ import org.springframework.stereotype.Service;
 @Service
 @Aspect
 public class SecureAnnotationsInterceptor {
-	
+
     @Autowired
     private SecurityHandler requestHandler;
-    
+
     @Autowired
     private SessionHandler sessionHandler;
-	
+
     @Around("execution(* co.centauri.archetype.backend.service.rest..*.*(..))")
     public Object checkRolesAllowed(ProceedingJoinPoint joinPoint) throws Throwable {
-    	
-    	boolean allowed = true;
-    	Collection<String> permisosAutorizados = getAllRolesAllowed(joinPoint);
-    	if (CollectionUtils.isNotEmpty(permisosAutorizados)) {
-    		HttpServletRequest request = requestHandler.getRequest(joinPoint);
-    		UserData userData = requestHandler.getUserFromRequestInfo(request);
-    		if (userData == null) {
-    			allowed = false;
-    		} else {
-    			String token = requestHandler.getToken(request);
-    			User user = sessionHandler.loadUserFromSession(request, token, userData.getId());
-    			allowed = (user == null) ? false : user.tieneAlgunPermiso(permisosAutorizados);
-    		}
-    	}
-    	
-    	if (!allowed) {
-    		return Response.status(Status.FORBIDDEN).build();
-    	}
+
+        boolean allowed = true;
+        Collection<String> permisosAutorizados = getAllRolesAllowed(joinPoint);
+        if (CollectionUtils.isNotEmpty(permisosAutorizados)) {
+            HttpServletRequest request = requestHandler.getRequest(joinPoint);
+            UserData userData = requestHandler.getUserFromRequestInfo(request);
+            if (userData == null) {
+                allowed = false;
+            } else {
+                String token = requestHandler.getToken(request);
+                User user = sessionHandler.loadUserFromSession(request, token, userData.getId());
+                allowed = (user == null) ? false : user.tieneAlgunPermiso(permisosAutorizados);
+            }
+        }
+
+        if (!allowed) {
+            return Response.status(Status.FORBIDDEN).build();
+        }
 
         Object returnValue = joinPoint.proceed();
         return returnValue;
     }
-    
+
     private Collection<String> getAllRolesAllowed(ProceedingJoinPoint joinPoint) {
-    	
-    	MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-    	Class<?> clazz = methodSignature.getDeclaringType();
-    	
-    	RolesAllowed rolsAllowedAtClassLevel = clazz.getAnnotation(RolesAllowed.class);
-    	RolesAllowed rolsAllowedAtMethodLevel = methodSignature.getMethod().getAnnotation(RolesAllowed.class);
-    	
-    	Collection<String> rols = concat(new HashSet<String>(), rolsAllowedAtClassLevel);
-    	rols = concat(rols, rolsAllowedAtMethodLevel);
-    	
-    	return rols;
+
+        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+        Class<?> clazz = methodSignature.getDeclaringType();
+
+        RolesAllowed rolsAllowedAtClassLevel = clazz.getAnnotation(RolesAllowed.class);
+        RolesAllowed rolsAllowedAtMethodLevel = methodSignature.getMethod().getAnnotation(RolesAllowed.class);
+
+        Collection<String> rols = concat(new HashSet<String>(), rolsAllowedAtClassLevel);
+        rols = concat(rols, rolsAllowedAtMethodLevel);
+
+        return rols;
     }
-    
+
     private Collection<String> concat(Collection<String> collection, RolesAllowed rolesAllowed) {
-    	if (rolesAllowed != null) {
-    		String[] rols = rolesAllowed.value();
-    		if (rols != null) {
-    			for (String rol : rols) {
-    				collection.add(rol);
-    			}
-    		}
-    	}
-    	return collection;
+        if (rolesAllowed != null) {
+            String[] rols = rolesAllowed.value();
+            if (rols != null) {
+                for (String rol : rols) {
+                    collection.add(rol);
+                }
+            }
+        }
+        return collection;
     }
 }

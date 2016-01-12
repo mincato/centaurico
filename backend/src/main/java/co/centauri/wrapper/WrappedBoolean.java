@@ -11,9 +11,9 @@ public class WrappedBoolean implements Serializable {
     public WrappedBoolean(boolean value) {
         this.value = value;
     }
-    
+
     public boolean getValue() {
         return value;
     }
-    
+
 }

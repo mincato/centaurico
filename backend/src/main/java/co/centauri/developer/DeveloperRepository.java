@@ -14,7 +14,7 @@ import co.centauri.random.RandomInteger;
 public class DeveloperRepository {
 
     private static Map<Integer, Developer> developers;
-    
+
     private static final Logger LOGGER = Logger.getLogger(DeveloperRepository.class);
 
     static {
@@ -26,11 +26,11 @@ public class DeveloperRepository {
         developers.put(german.getId(), german);
         developers.put(pablo.getId(), pablo);
         developers.put(adrian.getId(), adrian);
-        
+
         LOGGER.info("============ " + developers.size() + " created");
     }
 
-    public List<Developer> find() {        
+    public List<Developer> find() {
         return new ArrayList<>(developers.values());
     }
 

@@ -22,5 +22,5 @@ public class EqualsPropertyPredicate implements Predicate {
             return false;
         }
     }
-    
+
 }

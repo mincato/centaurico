@@ -28,30 +28,29 @@ public class FileUploadRestService {
 
     @Autowired
     private RestResponseHandler responseHandler;
-    
+
     @Value("${documents.dir}")
     private String directory;
-    
+
     @Autowired
     private FileUtil fileUtil;
-    
+
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response upload(@Context HttpServletRequest request, Attachment attachment) {
         try {
-        	String completeFileName = saveFile(attachment);
+            String completeFileName = saveFile(attachment);
             return responseHandler.buildSuccessResponse(
-            		Arrays.asList(new UploadResponse(
-            				Status.OK.name(), completeFileName)), Status.OK);
+                    Arrays.asList(new UploadResponse(Status.OK.name(), completeFileName)), Status.OK);
         } catch (Exception e) {
             return responseHandler.buildErrorResponse(e);
         }
     }
-    
+
     private String saveFile(Attachment attachment) throws Exception {
-    	InputStream is = attachment.getDataHandler().getInputStream();
-    	String fileName = attachment.getContentDisposition().getParameter("filename");
-    	return fileUtil.saveToFile(directory, fileName, is);
-    }    
-     
+        InputStream is = attachment.getDataHandler().getInputStream();
+        String fileName = attachment.getContentDisposition().getParameter("filename");
+        return fileUtil.saveToFile(directory, fileName, is);
+    }
+
 }

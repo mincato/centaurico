@@ -17,6 +17,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.war.plugin.version>2.1</maven.war.plugin.version>
         <yeoman.maven.plugin.version>0.5</yeoman.maven.plugin.version>
+        <version.formatter.maven.plugin>0.5.2</version.formatter.maven.plugin>
 
         <junit.version>4.12</junit.version>
         <mockito.version>1.10.19</mockito.version>
@@ -272,6 +273,29 @@
 								<configuration>
 									<gruntBuildArgs>build</gruntBuildArgs>
 								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+		<profile>
+			<id>format</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>net.revelc.code</groupId>
+						<artifactId>formatter-maven-plugin</artifactId>
+						<version>${version.formatter.maven.plugin}</version>
+						<configuration>
+							<configFile>Centaurico-Code-Style.xml</configFile>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>format</goal>
+								</goals>
 							</execution>
 						</executions>
 					</plugin>

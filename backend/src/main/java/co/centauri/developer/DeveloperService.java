@@ -9,7 +9,7 @@ import co.centauri.exception.NotFoundException;
 
 @Service
 public class DeveloperService {
-    
+
     @Autowired
     private DeveloperRepository repository;
 
@@ -25,7 +25,7 @@ public class DeveloperService {
         }
         return developer;
     }
-    
+
     public Developer save(Developer newDeveloper) {
         Developer developerSaved = repository.save(newDeveloper);
         return developerSaved;

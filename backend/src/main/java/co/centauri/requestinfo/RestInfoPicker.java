@@ -16,13 +16,13 @@ import co.centauri.security.SecurityHandler;
 @Service
 @Aspect
 public class RestInfoPicker {
-    
+
     @Autowired
     private SecurityHandler requestHandler;
-    
+
     @Around("execution(* co.centauri.archetype.backend.service.rest..*.*(..))")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
-    	
+
         HttpServletRequest request = requestHandler.getRequest(joinPoint);
         if (request != null) {
             RequestInfo requestInfo = requestHandler.getRequestInfoOrCreateNew(request);
@@ -31,12 +31,12 @@ public class RestInfoPicker {
             requestInfo.setParameters(getInvokationParameters(joinPoint));
             requestHandler.saveRequestInfo(request, requestInfo);
         }
-        
+
         Object returnValue = joinPoint.proceed();
 
         return returnValue;
     }
-    
+
     private List<Object> getInvokationParameters(ProceedingJoinPoint joinPoint) {
 
         List<Object> parameters = new ArrayList<Object>();
@@ -50,5 +50,5 @@ public class RestInfoPicker {
         }
         return parameters;
     }
-    
+
 }

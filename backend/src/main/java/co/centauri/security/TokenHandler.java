@@ -109,7 +109,7 @@ public class TokenHandler {
         return jwt;
     }
 
-    private void verifySignature(SignedJWT jwt) {        
+    private void verifySignature(SignedJWT jwt) {
         boolean verifiedSignature = false;
         try {
             JWSVerifier verifier = new MACVerifier(simetricKey);

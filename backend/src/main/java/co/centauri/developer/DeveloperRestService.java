@@ -63,7 +63,7 @@ public class DeveloperRestService {
             return responseHandler.buildErrorResponse(e);
         }
     }
-    
+
     @PUT
     @Path("{id}")
     public Response update(@Context HttpServletRequest request, Developer developer) {
@@ -74,7 +74,7 @@ public class DeveloperRestService {
             return responseHandler.buildErrorResponse(e);
         }
     }
-    
+
     @DELETE
     @Path("{id}")
     public Response delete(@Context HttpServletRequest request, @PathParam("id") Integer id) {
@@ -83,6 +83,6 @@ public class DeveloperRestService {
             return responseHandler.buildSuccessResponse(Status.OK);
         } catch (Exception e) {
             return responseHandler.buildErrorResponse(e);
-        }        
+        }
     }
 }

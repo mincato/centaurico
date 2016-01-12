@@ -16,19 +16,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthorizationFilter implements ContainerRequestFilter {
-    
+
     @Context
     private HttpServletRequest request;
-    
+
     @Autowired
     private SecurityHandler requestHandler;
-    
+
     private static final Logger LOGGER = Logger.getLogger(AuthorizationFilter.class);
-    
+
     private List<PublicRule> publicMethodsRules;
-    
+
     public void filter(ContainerRequestContext context) {
-        
+
         try {
             UserData userData = null;
             if (isPublicMethod(request.getMethod(), request.getRequestURI())) {
@@ -48,7 +48,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
             context.abortWith(unauthorizedResponse);
         }
     }
-    
+
     private boolean isPublicMethod(String httpMethod, String uri) {
         for (PublicRule publicRule : publicMethodsRules) {
             if (httpMethod.equals(publicRule.getHttpMethod())) {
@@ -61,13 +61,13 @@ public class AuthorizationFilter implements ContainerRequestFilter {
         }
         return false;
     }
-    
+
     public List<PublicRule> getPublicMethodsRules() {
         return publicMethodsRules;
     }
-    
+
     public void setPublicMethodsRules(List<PublicRule> publicMethodsRules) {
         this.publicMethodsRules = publicMethodsRules;
     }
- 
+
 }

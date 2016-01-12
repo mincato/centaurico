@@ -14,31 +14,30 @@ import co.centauri.security.SecurityHandler;
 
 @Service
 public class RequestInfoFlusher implements ContainerResponseFilter {
-    
+
     private static final Logger CONSOLE_LOGGER = Logger.getLogger("requestInfoConsoleLogger");
     private static final Logger FILE_LOGGER = Logger.getLogger("requestInfoFileLogger");
-    
+
     @Context
     private HttpServletRequest request;
-    
+
     @Autowired
     private SecurityHandler requestHandler;
 
     @Override
     public void filter(ContainerRequestContext inContext, ContainerResponseContext outContext) {
-        
+
         String requestInfoJSON = null;
 
-        RequestInfo requestInfo = requestHandler
-                .getRequestInfoOrCreateNew(request);
+        RequestInfo requestInfo = requestHandler.getRequestInfoOrCreateNew(request);
 
         try {
             requestInfoJSON = requestInfo.toJSON();
 
         } catch (Exception e) {
             requestInfoJSON = "{\"error\" : \"unable to serialize request\"}";
-        }            
-            
+        }
+
         CONSOLE_LOGGER.debug("requestInfo = " + requestInfoJSON);
         FILE_LOGGER.info(requestInfoJSON);
     }

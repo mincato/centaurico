@@ -13,25 +13,25 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FileUtil {
-	
-	private static final Logger LOGGER = Logger.getLogger(FileUtil.class);
-	
-	public String saveToFile(String absolutePath, String fileName, InputStream is) {
-		
-		String file = getCompleteFileName(absolutePath, fileName);
-		
+
+    private static final Logger LOGGER = Logger.getLogger(FileUtil.class);
+
+    public String saveToFile(String absolutePath, String fileName, InputStream is) {
+
+        String file = getCompleteFileName(absolutePath, fileName);
+
         OutputStream outputStream = null;
-        
+
         try {
             outputStream = new FileOutputStream(file);
-            
+
             IOUtils.copy(is, outputStream);
 
         } catch (Exception e) {
-        	LOGGER.error(MessageFormat.format("Ocurrio un error al intentar guardar el archivo {0}", file), e);
+            LOGGER.error(MessageFormat.format("Ocurrio un error al intentar guardar el archivo {0}", file), e);
             throw new RuntimeException(e);
         } finally {
-            if(outputStream != null) {
+            if (outputStream != null) {
                 try {
                     outputStream.close();
                 } catch (IOException e) {
@@ -39,12 +39,12 @@ public class FileUtil {
                 }
             }
         }
-        
+
         return file;
-	}
-	
-	private String getCompleteFileName(String absolutePath, String fileName) {
-		return absolutePath + File.separator + fileName;
-	}
-	
+    }
+
+    private String getCompleteFileName(String absolutePath, String fileName) {
+        return absolutePath + File.separator + fileName;
+    }
+
 }

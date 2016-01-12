@@ -13,24 +13,24 @@ public class SendMailException extends RuntimeException {
     private final String text;
 
     public SendMailException(Exception e, List<String> to, String subject, String text) {
-        
+
         super(MessageFormat.format(ERROR_MESSAGE_FORMAT, to, subject, text), e);
-        
+
         this.to = to;
         this.subject = subject;
-        this.text = text;        
+        this.text = text;
     }
-    
+
     public List<String> getTo() {
         return to;
     }
-    
+
     public String getSubject() {
         return subject;
     }
-    
+
     public String getText() {
         return text;
     }
-    
+
 }

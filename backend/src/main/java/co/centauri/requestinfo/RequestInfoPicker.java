@@ -20,10 +20,10 @@ public class RequestInfoPicker implements ContainerRequestFilter {
 
     @Context
     private HttpServletRequest request;
-    
+
     @Autowired
     private SecurityHandler requestHandler;
-    
+
     @Override
     public void filter(ContainerRequestContext context) {
 
@@ -33,14 +33,14 @@ public class RequestInfoPicker implements ContainerRequestFilter {
         requestInfo.setIpAddress(request.getRemoteAddr());
         requestInfo.setEndpoint(request.getRequestURI());
         requestInfo.setHeader(buildHeader(request));
-        
+
         requestHandler.saveRequestInfo(request, requestInfo);
     }
-    
+
     private Map<String, String> buildHeader(HttpServletRequest request) {
-        
+
         Map<String, String> header = new HashMap<String, String>();
-        
+
         Enumeration<String> keys = request.getHeaderNames();
         if (keys != null) {
             while (keys.hasMoreElements()) {
@@ -50,7 +50,7 @@ public class RequestInfoPicker implements ContainerRequestFilter {
                 }
             }
         }
-        
+
         return header;
     }
 }

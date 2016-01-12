@@ -21,20 +21,21 @@
     <import resource="profiles.xml" />    
     <import resource="commons.xml" />        
     <import resource="security-jwt.xml" />
-    <import resource="database.xml"/>
+    <import resource="security-authenticator.xml" />
+    <!-- <import resource="database.xml"/> -->
     <import resource="errors.xml" />
     
     <import resource="public-methods-rules.xml" />
     
-    <bean id="authorizationFilter" class="ar.com.inclufin.analytics.backend.service.aspect.AuthorizationFilter">
+    <bean id="authorizationFilter" class="co.centauri.security.AuthorizationFilter">
         <property name="publicMethodsRules" ref="publicMethodsRules" />
     </bean>
     
     <jaxrs:server id="businessServiceJaxRs" address="/">
         <jaxrs:serviceBeans>
-            <ref bean="helloRestService" />
-            <ref bean="uploadDocRestService" />
-            <ref bean="tipoMaterialRestService" />
+            <ref bean="helloWorldRestService" />
+            <ref bean="fileUploadRestService" />
+            <ref bean="developerRestService" />
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean="jsonProvider" />
@@ -46,19 +47,20 @@
         </jaxrs:providers>
     </jaxrs:server>
     
-    <jaxrs:server id="loginServiceJaxRs" address="/auth">
+    <jaxrs:server id="authServiceJaxRs" address="/auth">
         <jaxrs:serviceBeans>
-            <ref bean="loginRestService" />
+            <ref bean="authenticationRestService" />
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <ref bean="jsonProvider" />
             <ref bean="requestInfoPicker" />
             <ref bean="responseInfoPicker" />
             <ref bean="requestInfoFlusher" />
+            <ref bean="accessControlAllowOriginFilter" />
         </jaxrs:providers>
     </jaxrs:server>
 
-    <context:component-scan base-package="ar.com.inclufin.analytics.backend"
+    <context:component-scan base-package="co.centauri"
         annotation-config="true" />
     <context:annotation-config />
     

@@ -1,0 +1,15 @@
+<section data-ng-controller="DeveloperController">
+    <div class="page-header">
+        <h1>New Developer</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div data-ng-include="'modules/developers/views/form-developer.view.html'"></div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>

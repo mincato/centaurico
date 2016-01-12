@@ -1,5 +1,13 @@
 {% extends 'layout.server.view.html' %}
 
 {% block content %}
-	<section data-ui-view></section>
+    <section data-ng-controller="ApplicationController">
+        
+        <cent-message ng-model="messages.danger" danger></cent-message>
+        <cent-message ng-model="messages.info" info></cent-message>
+        <cent-message ng-model="messages.warning" warning></cent-message>
+        <cent-message ng-model="messages.success" success></cent-message>
+        
+        <section data-ui-view></section>
+    </section>	
 {% endblock %}

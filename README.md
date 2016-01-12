@@ -3,15 +3,15 @@
 ### Proyectos ###
 
 * Frontend: AngularJS
-* Backend: Java (Spring) + MyBatis
+* Backend: Java (Spring) + MyBatis + JPA (Hibernate)
 
 Descripción:
 ============
-Este proyecto es un arquetipo para Centaurico. En este proyecto se crea una capa de persistencia con Spring Data + MyBatis.
+Este proyecto es un arquetipo para Centaurico. En este proyecto se crea una capa de persistencia con Spring Data + MyBatis o JPA (Hibernate).
 
 El Front-End está preparado para correr en un Node.js, con el fin de que en un ambiente de desarrollo se pueda trabajar de forma cómoda.
 
-El Back-End es una aplicación Java, armada con Maven, que expone servicios REST con JAX-RS (Apache CXF) y utiliza Spring + MyBatis. Para deployar el Front-End más el Back-End en un Tomcat, el perfil "grunt-build" de Maven se encarga de empaquetar todo en un único WAR listo para copiar a la carpeta "webapps" del contenedor de Servlets.
+El Back-End es una aplicación Java, armada con Maven, que expone servicios REST con JAX-RS (Apache CXF) y utiliza Spring + MyBatis o JPA (Hibernate). Para deployar el Front-End más el Back-End en un Tomcat, el perfil "grunt-build" de Maven se encarga de empaquetar todo en un único WAR listo para copiar a la carpeta "webapps" del contenedor de Servlets.
 
 ¡IMPORTANTE!
 =============
@@ -50,3 +50,10 @@ Parado sobre la carpeta frontend del proyecto, ejecutar:
 > grunt
 
 Si todo sale bien, la aplicación estará disponible en localhost:3000, apuntando a los servicios REST provistos por Tomcat. El Tomcat tiene que estar levantado con el backend ecuchando en el puerto 8080.
+
+Para formatear el código fuente:
+================================
+
+El proyecto incluye un Code Style en formato de Eclipse XML para darle un formato al código fuente. Este Code Style puede utilizarse de dos maneras: 1) Incluyéndolo en el Eclipse, o 2) Compilando con el perfil format activo, de la siguiente forma:
+
+> mvn clean package -Pformat

@@ -6,7 +6,7 @@ angular.module('security').config(['$stateProvider', '$urlRouterProvider',
 		$stateProvider.
 		state('login', {
 			url: '/login',
-			templateUrl: 'modules/security/views/login.client.view.html'
+			templateUrl: 'modules/security/views/login.view.html'
 		});        
 	}
 ]);

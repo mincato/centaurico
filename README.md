@@ -56,4 +56,4 @@ Para formatear el código fuente:
 
 El proyecto incluye un Code Style en formato de Eclipse XML para darle un formato al código fuente. Este Code Style puede utilizarse de dos maneras: 1) Incluyéndolo en el Eclipse, o 2) Compilando con el perfil format activo, de la siguiente forma:
 
-> mvn clean install -Pformat
+> mvn clean package -Pformat

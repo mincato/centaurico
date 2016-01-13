@@ -20,7 +20,7 @@ public class RestInfoPicker {
     @Autowired
     private SecurityHandler requestHandler;
 
-    @Around("execution(* co.centauri.archetype.backend.service.rest..*.*(..))")
+    @Around("execution(* co.centauri..*RestService.*(..))")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
 
         HttpServletRequest request = requestHandler.getRequest(joinPoint);

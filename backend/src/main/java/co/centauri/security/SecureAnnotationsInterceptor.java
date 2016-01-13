@@ -26,7 +26,7 @@ public class SecureAnnotationsInterceptor {
     @Autowired
     private SessionHandler sessionHandler;
 
-    @Around("execution(* co.centauri.archetype.backend.service.rest..*.*(..))")
+    @Around("execution(* co.centauri..*RestService.*(..))")
     public Object checkRolesAllowed(ProceedingJoinPoint joinPoint) throws Throwable {
 
         boolean allowed = true;

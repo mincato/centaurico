@@ -1,46 +1,47 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>co.centauri.archetype</groupId>
-    <artifactId>centaurico-archetype</artifactId>
-    <packaging>war</packaging>
-    <version>0.1</version>
-    <name>Centaurico Archetype</name>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>co.centauri.archetype</groupId>
+	<artifactId>centaurico-archetype</artifactId>
+	<packaging>war</packaging>
+	<version>0.1</version>
+	<name>Centaurico Archetype</name>
 
-    <properties>
-    	<frontend.basedir>../frontend</frontend.basedir>
-    
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.war.plugin.version>2.1</maven.war.plugin.version>
-        <yeoman.maven.plugin.version>0.5</yeoman.maven.plugin.version>
-        <version.formatter.maven.plugin>0.5.2</version.formatter.maven.plugin>
+	<properties>
+		<frontend.basedir>../frontend</frontend.basedir>
 
-        <junit.version>4.12</junit.version>
-        <mockito.version>1.10.19</mockito.version>
-        <log4j.version>2.5</log4j.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.war.plugin.version>2.1</maven.war.plugin.version>
+		<yeoman.maven.plugin.version>0.5</yeoman.maven.plugin.version>
+		<version.formatter.maven.plugin>0.5.2</version.formatter.maven.plugin>
 
-        <servlet.version>3.1.0</servlet.version>
-        <cxf.version>3.1.4</cxf.version>
-        <spring.version>4.2.4.RELEASE</spring.version>
-        <jackson.version>2.6.4</jackson.version>
-        
-        <commons-lang.version>3.4</commons-lang.version>
-        <commons-collection.version>4.1</commons-collection.version>
-        <commons-beanutils.version>1.9.2</commons-beanutils.version>
-        <commons-io.version>2.4</commons-io.version>
-        
-        <slf4j.version>1.7.13</slf4j.version>
-        <nimbus-jose-jwt.version>4.11</nimbus-jose-jwt.version>
-        <mail.version>1.5.5</mail.version>
-        <aspectj.version>1.8.7</aspectj.version>
-        <jsr250-api.version>1.0</jsr250-api.version>
-        
-    </properties>
-    
+		<junit.version>4.12</junit.version>
+		<mockito.version>1.10.19</mockito.version>
+		<unitils.version>3.4.2</unitils.version>
+		<log4j.version>2.5</log4j.version>
+
+		<servlet.version>3.1.0</servlet.version>
+		<cxf.version>3.1.4</cxf.version>
+		<spring.version>4.2.4.RELEASE</spring.version>
+		<jackson.version>2.6.4</jackson.version>
+
+		<commons-lang.version>3.4</commons-lang.version>
+		<commons-collection.version>4.1</commons-collection.version>
+		<commons-beanutils.version>1.9.2</commons-beanutils.version>
+		<commons-io.version>2.4</commons-io.version>
+
+		<slf4j.version>1.7.13</slf4j.version>
+		<nimbus-jose-jwt.version>4.11</nimbus-jose-jwt.version>
+		<mail.version>1.5.5</mail.version>
+		<aspectj.version>1.8.7</aspectj.version>
+		<jsr250-api.version>1.0</jsr250-api.version>
+
+	</properties>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -51,78 +52,84 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
-	</dependencyManagement>    
+	</dependencyManagement>
 
-    <dependencies>
-    
-        <!-- Test -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>        
-        </dependency>       
+	<dependencies>
 
-        <!-- Logging -->
-        <dependency>
+		<!-- Test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.unitils</groupId>
+			<artifactId>unitils-core</artifactId>
+			<version>${unitils.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Logging -->
+		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>${log4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
 
-        <!-- Servlet 3.1 Specification for Tomcat 8 -->
+		<!-- Servlet 3.1 Specification for Tomcat 8 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${servlet.version}</version>
 			<scope>provided</scope>
-		</dependency>        
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-servlet_3.0_spec</artifactId>
-            <version>1.0</version>
-            <scope>provided</scope>
-        </dependency>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-servlet_3.0_spec</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
 
-        <!-- Apache CXF -->
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
-            <version>${cxf.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.geronimo.specs</groupId>
-                    <artifactId>geronimo-javamail_1.4_spec</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-rs-security-oauth2</artifactId>
-            <version>${cxf.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.geronimo.specs</groupId>
-                    <artifactId>geronimo-servlet_3.0_spec</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+		<!-- Apache CXF -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+			<version>${cxf.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.geronimo.specs</groupId>
+					<artifactId>geronimo-javamail_1.4_spec</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-rs-security-oauth2</artifactId>
+			<version>${cxf.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.geronimo.specs</groupId>
+					<artifactId>geronimo-servlet_3.0_spec</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
 		<!-- JSON Provider -->
 		<dependency>
@@ -130,108 +137,108 @@
 			<artifactId>jackson-jaxrs-json-provider</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-		
-        <!-- Spring Framework -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-        </dependency>
-  		<dependency>
+
+		<!-- Spring Framework -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
 		</dependency>
-		
-		<!-- AspectJ Tools -->        
+
+		<!-- AspectJ Tools -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjtools</artifactId>
 			<version>${aspectj.version}</version>
 		</dependency>
 
-        <!-- Apache Commons -->
-        <dependency>
+		<!-- Apache Commons -->
+		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-            <version>${commons-lang.version}</version>
-        </dependency>
-        <dependency>
+			<version>${commons-lang.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
-            <version>${commons-collection.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>${commons-beanutils.version}</version>
-        </dependency>
+			<version>${commons-collection.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>${commons-beanutils.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>${commons-io.version}</version>
 		</dependency>
 
-        <!-- For JWT authentication -->
-        <dependency>
-            <groupId>com.nimbusds</groupId>
-            <artifactId>nimbus-jose-jwt</artifactId>
-            <version>${nimbus-jose-jwt.version}</version>
-        </dependency>     
-        
+		<!-- For JWT authentication -->
+		<dependency>
+			<groupId>com.nimbusds</groupId>
+			<artifactId>nimbus-jose-jwt</artifactId>
+			<version>${nimbus-jose-jwt.version}</version>
+		</dependency>
+
 		<!-- JavaMail -->
-        <dependency>
+		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>javax.mail-api</artifactId>
-            <version>${mail.version}</version>
-        </dependency>
-        
-		<!-- JSR250 API for @RolesAllowed annotation -->        
+			<version>${mail.version}</version>
+		</dependency>
+
+		<!-- JSR250 API for @RolesAllowed annotation -->
 		<dependency>
 			<groupId>javax.annotation</groupId>
 			<artifactId>jsr250-api</artifactId>
 			<version>${jsr250-api.version}</version>
 		</dependency>
 
-    </dependencies>
+	</dependencies>
 
-    <build>
-        <finalName>centaurico-archetype</finalName>
+	<build>
+		<finalName>centaurico-archetype</finalName>
 
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.plugin.version}</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
 
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${maven.war.plugin.version}</version>
 				<configuration>
 					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-                    <warName>${project.build.finalName}</warName>
-                    <webResources>
-			            <resource>
-						  <!-- this is relative to the pom.xml directory -->
-			              <directory>${frontend.basedir}/public/dist</directory>
-			            </resource>
-			        </webResources>
+					<warName>${project.build.finalName}</warName>
+					<webResources>
+						<resource>
+							<!-- this is relative to the pom.xml directory -->
+							<directory>${frontend.basedir}/public/dist</directory>
+						</resource>
+					</webResources>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
@@ -240,23 +247,23 @@
 					<username>admin</username>
 					<password>admin</password>
 				</configuration>
-			</plugin>			
+			</plugin>
 
-        </plugins>
-    </build>
+		</plugins>
+	</build>
 
 	<profiles>
 		<profile>
 			<id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>			
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 		</profile>
 		<profile>
 			<id>grunt-build</id>
 			<build>
 				<plugins>
-		 			<plugin>
+					<plugin>
 						<groupId>com.github.trecloux</groupId>
 						<artifactId>yeoman-maven-plugin</artifactId>
 						<version>${yeoman.maven.plugin.version}</version>
@@ -279,7 +286,7 @@
 				</plugins>
 			</build>
 		</profile>
-		
+
 		<profile>
 			<id>format</id>
 			<build>

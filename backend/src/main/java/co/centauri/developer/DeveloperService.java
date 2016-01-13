@@ -19,7 +19,7 @@ public class DeveloperService {
     }
 
     public Developer find(Integer id) {
-        Developer developer = repository.find(id);
+        Developer developer = repository.findById(id);
         if (developer == null) {
             throw new NotFoundException();
         }
@@ -37,6 +37,10 @@ public class DeveloperService {
 
     public void delete(Integer id) {
         repository.delete(id);
+    }
+
+    public void setRepository(DeveloperRepository repository) {
+        this.repository = repository;
     }
 
 }

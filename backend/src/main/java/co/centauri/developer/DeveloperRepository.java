@@ -42,7 +42,7 @@ public class DeveloperRepository {
         return developer;
     }
 
-    public Developer find(Integer id) {
+    public Developer findById(Integer id) {
         return developers.get(id);
     }
 

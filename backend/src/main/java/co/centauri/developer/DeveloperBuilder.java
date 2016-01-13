@@ -31,4 +31,31 @@ public class DeveloperBuilder {
         return developer;
     }
 
+    public static Developer createKyloRen() {
+        Developer developer = new Developer();
+        developer.setId(RandomInteger.getNext());
+        developer.setName("Kylo");
+        developer.setLastName("Ren");
+        developer.setSeniority(Seniority.JUNIOR);
+        return developer;
+    }
+
+    public static Developer createDarthVader() {
+        Developer developer = new Developer();
+        developer.setId(RandomInteger.getNext());
+        developer.setName("Darth");
+        developer.setLastName("Vader");
+        developer.setSeniority(Seniority.SENIOR);
+        return developer;
+    }
+
+    public static Developer createDarthMaul() {
+        Developer developer = new Developer();
+        developer.setId(RandomInteger.getNext());
+        developer.setName("Darth");
+        developer.setLastName("Maul");
+        developer.setSeniority(Seniority.SEMI_SENIOR);
+        return developer;
+    }
+
 }

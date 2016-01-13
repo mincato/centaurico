@@ -1,9 +1,8 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/inclufin-analytics-frontend-dev',
 	app: {
-		title: 'inclufin-analytics-frontend - Development Environment'
+		title: 'centaurico-archetype - Development Environment'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

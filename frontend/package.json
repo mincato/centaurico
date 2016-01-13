@@ -1,6 +1,6 @@
 {
-  "name": "inclufin-analytics-frontend",
-  "description": "Usaremos la parte de AngularJS para apuntar a un servidor externo. Para este proyecto no se utilizará la parte de Node.js.",
+  "name": "centaurico-archetype",
+  "description": "Centaurico Archetype",
   "version": "0.0.1",
   "author": "Centaurico",
   "engines": {

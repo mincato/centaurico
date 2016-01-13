@@ -2,8 +2,8 @@
 
 module.exports = {
 	app: {
-		title: 'inclufin-analytics-frontend',
-		description: 'Usaremos la parte de AngularJS para apuntar a un servidor externo. Para este proyecto no se utilizará la parte de Node.js.',
+		title: 'centaurico-archetype',
+		description: 'Centaurico Archetype',
 		keywords: 'AngularJS'
 	},
 	port: process.env.PORT || 3000,

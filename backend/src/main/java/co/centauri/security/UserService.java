@@ -41,14 +41,15 @@ public class UserService {
 
         LOGGER.info(MessageFormat.format("--- Login: {0} ---", username));
 
-        if (!authenticatorService.authenticate(username, password)) {
-            throw new AuthenticationException();
-        }
-
         User user = findByUsername(username);
         if (user == null) {
-            throw new ForbiddenException();
+            throw new ForbiddenException("User not exist in the DB");
         }
+
+        if (!authenticatorService.authenticate(user, password)) {
+            throw new ForbiddenException("Invalid Password");
+        }
+        
         return user;
     }
 

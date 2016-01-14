@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 public class AuthenticatorMockService implements AuthenticatorService {
 
     @Override
-    public boolean authenticate(String username, String password) {
+    public boolean authenticate(User user, String password) {
         return true;
     }
 

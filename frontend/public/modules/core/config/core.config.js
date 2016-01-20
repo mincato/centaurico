@@ -2,10 +2,12 @@
 
 angular.module('core').service('Configuration', [ '$location', function($location) {
 
-	var serviceContext = 'http://' + $location.host() + ':8080/mate-search-backoffice/services/';
+	var serviceContext = 'http://' + $location.host() + ':8080/centaurico-archetype/services/';
     
     return {
         serviceContext : serviceContext
     };
 
 }]);
+
+

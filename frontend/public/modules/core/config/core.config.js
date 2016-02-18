@@ -1,7 +1,13 @@
 'use strict';
 
-angular.module('core').constant('Configuration', {
+angular.module('core').service('Configuration', [ '$location', function($location) {
 
-	serviceContext : 'http://localhost:8080/centaurico-archetype/services/'
+	var serviceContext = 'http://' + $location.host() + ':8080/centaurico-archetype/services/';
+    
+    return {
+        serviceContext : serviceContext
+    };
 
-});
+}]);
+
+
